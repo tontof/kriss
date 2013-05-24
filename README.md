@@ -1,3 +1,4 @@
 kriss
 =====
-Presentation of my simple and smart (or stupid) apps
+Presentation of my simple and smart (or stupid) apps:
+http://tontof.net/kriss/
