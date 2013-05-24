@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>KrISS feed</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="title" content="KrISS feed"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2013-05-24 09:28:51 CEST"/>
+<meta name="author" content="Tontof"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<style type="text/css"></style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+ <a accesskey="h" href=".."> UP </a>
+ |
+ <a accesskey="H" href=".."> HOME </a>
+</div>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">KrISS feed</h1>
+
+<p>KrISS feed is a simple and smart (or stupid) feed reader.
+To see an online example: <a href="http://tontof.net/feed">http://tontof.net/feed</a>
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Features</a></li>
+<li><a href="#sec-2">2 Requirements</a></li>
+<li><a href="#sec-3">3 Installation</a></li>
+<li><a href="#sec-4">4 Style</a>
+<ul>
+<li><a href="#sec-4-1">4.1 How to customize KrISS feed</a></li>
+<li><a href="#sec-4-2">4.2 Screenshots</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 TODOs</a></li>
+<li><a href="#sec-6">6 FAQ (Frequently Ask Question)</a>
+<ul>
+<li><a href="#sec-6-1">6.1 Why did I create KrISS feed ?</a></li>
+<li><a href="#sec-6-2">6.2 What is KISS philosophy ?</a></li>
+<li><a href="#sec-6-3">6.3 Why I can not add or update my feeds properly (Problem with last update) ?</a></li>
+<li><a href="#sec-6-4">6.4 Does it work on free.fr ?</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7 For developpers</a>
+<ul>
+<li><a href="#sec-7-1">7.1 How KrISS feed is organized ?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Features</h2>
+<div class="outline-text-2" id="text-1">
+
+<ul>
+<li><a href="#sec-6-2">KISS</a> philosophy (Keep It Simple and Smart)
+</li>
+<li>Fast (the fastest RSS reader ?)
+</li>
+<li>Easy to <a href="#sec-3">install</a> (if you find an easier solution, I'm all ears)
+</li>
+<li>Easy to personnalize (default style is ugly ? Just go and see <a href="#sec-4">Style</a>)
+</li>
+<li>Easy to share with <a href="http://sebsauvage.net/wiki/doku.php?id=php:shaarli">Shaarli</a> but also others sharing tools using GET parameters of URL
+</li>
+<li>Mobile support using responsive web design
+</li>
+<li>Customize everything such as menu, paging to keep only what you need
+</li>
+<li>Auto mark as read when going to next item
+</li>
+<li>Add favicon to feeds
+</li>
+<li>Public/protected/private visibility
+</li>
+<li>Update manually/using javascript/using cron
+</li>
+<li>Keep items as starred
+</li>
+<li>List or expanded view
+</li>
+<li>Order by newer or older items
+</li>
+<li>Show unread or all items
+</li>
+<li><a href="http://tontof.net/feed/?help">Keyboard shorcuts</a>
+</li>
+<li>OPML import/export
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Requirements</h2>
+<div class="outline-text-2" id="text-2">
+
+<ul>
+<li>php 5.2
+</li>
+<li>your server should be able to download external content
+</li>
+<li>DOMDocument + libxml2 (install php-xml)
+</li>
+<li>mbstring (install php-mbstring)
+</li>
+<li>recommanded: curl (install php5-curl)
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Installation</h2>
+<div class="outline-text-2" id="text-3">
+
+<ul>
+<li>Download index.php file:
+<ul>
+<li>Stable version: <a href="https://raw.github.com/tontof/kriss_feed/master/index.php">index.php</a>
+</li>
+<li>Development version: <a href="https://raw.github.com/tontof/kriss_feed/master/src/index.php">index.php</a>
+</li>
+</ul>
+
+</li>
+<li>Copy the index.php file on your web server
+</li>
+<li>Access this file in your browser
+</li>
+<li>Choose a login and a password and that's it !
+</li>
+<li>Now you can login, import your opml file and enjoy.
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Style</h2>
+<div class="outline-text-2" id="text-4">
+
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> How to customize KrISS feed</h3>
+<div class="outline-text-3" id="text-4-1">
+
+<p>That's easy you just have to create a <code>user.css</code> file into <code>inc</code> directory:
+</p><ul>
+<li><code>index.php</code>
+</li>
+<li><code>inc</code>
+<ul>
+<li><code>user.css</code>
+</li>
+</ul>
+
+</li>
+</ul>
+
+<p>That's it !
+</p></div>
+
+</div>
+
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Screenshots</h3>
+<div class="outline-text-3" id="text-4-2">
+
+<p>To install a style, just download the corresponding css file and place
+into <code>inc</code> directory (rename into <code>user.css</code> if necessary).
+Some styles need other files as font.
+</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">author</th><th scope="col" class="left">screenshots</th><th scope="col" class="left">files</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">ali0une</td><td class="left"><a href="img/style/ali0une_white.jpg"><img src="img/style/ali0une_white_thumb.jpg" alt="ali0une_white_thumb.jpg"/></a></td><td class="left"><a href="https://raw.github.com/tontof/kriss_feed/master/style/ali0une/white.css">css</a> (<a href="https://github.com/tontof/kriss_feed/tree/master/style/ali0une">other files</a>)</td></tr>
+<tr><td class="left"></td><td class="left"><a href="img/style/ali0une_black.jpg"><img src="img/style/ali0une_black_thumb.jpg" alt="ali0une_black_thumb.jpg"/></a></td><td class="left"><a href="https://raw.github.com/tontof/kriss_feed/master/style/ali0une/black.css">css</a> (<a href="https://github.com/tontof/kriss_feed/tree/master/style/ali0une">other files</a>)</td></tr>
+</tbody>
+<tbody>
+<tr><td class="left">bootstrap</td><td class="left"><a href="img/style/bootstrap.png"><img src="img/style/bootstrap_thumb.jpg" alt="bootstrap_thumb.jpg"/></a></td><td class="left"><a href="https://raw.github.com/tontof/kriss_feed/master/style/bootstrap/bootstrap.css">css</a></td></tr>
+</tbody>
+<tbody>
+<tr><td class="left">geocities</td><td class="left"><a href="img/style/geocities.png"><img src="img/style/geocities_thumb.jpg" alt="geocities_thumb.jpg"/></a></td><td class="left"><a href="https://raw.github.com/tontof/kriss_feed/master/style/geocities/user.css">css</a></td></tr>
+</tbody>
+<tbody>
+<tr><td class="left">greader</td><td class="left"><a href="img/style/greader.png"><img src="img/style/greader_thumb.jpg" alt="greader_thumb.jpg"/></a></td><td class="left"><a href="https://raw.github.com/tontof/kriss_feed/master/style/greader/user.css">css</a></td></tr>
+</tbody>
+<tbody>
+<tr><td class="left">orangina-rouge</td><td class="left"><a href="img/style/orangina-rouge.png"><img src="img/style/orangina-rouge_thumb.jpg" alt="orangina-rouge_thumb.jpg"/></a></td><td class="left"><a href="https://raw.github.com/tontof/kriss_feed/master/style/orangina-rouge/user.css">css</a></td></tr>
+</tbody>
+<tbody>
+<tr><td class="left">p3ter</td><td class="left"><a href="img/style/p3ter.png"><img src="img/style/p3ter_thumb.jpg" alt="p3ter_thumb.jpg"/></a></td><td class="left"><a href="https://raw.github.com/tontof/kriss_feed/master/style/p3ter/user.css">css</a></td></tr>
+</tbody>
+<tbody>
+<tr><td class="left">pierre</td><td class="left"><a href="img/style/pierre.png"><img src="img/style/pierre_thumb.jpg" alt="pierre_thumb.jpg"/></a></td><td class="left"><a href="https://raw.github.com/tontof/kriss_feed/master/style/pierre/user.css">css</a></td></tr>
+</tbody>
+<tbody>
+<tr><td class="left">sebsauvage</td><td class="left"><a href="img/style/sebsauvage.png"><img src="img/style/sebsauvage_thumb.jpg" alt="sebsauvage_thumb.jpg"/></a></td><td class="left"><a href="https://raw.github.com/tontof/kriss_feed/master/style/sebsauvage/user.css">css</a></td></tr>
+</tbody>
+<tbody>
+<tr><td class="left">tvelter</td><td class="left"><a href="img/style/tvelter.png"><img src="img/style/tvelter_thumb.jpg" alt="tvelter_thumb.jpg"/></a></td><td class="left"><a href="https://raw.github.com/tontof/kriss_feed/master/style/tvelter/user.css">css</a></td></tr>
+</tbody>
+<tbody>
+<tr><td class="left">vinc3r</td><td class="left"><a href="img/style/vinc3r.jpg"><img src="img/style/vinc3r_thumb.jpg" alt="vinc3r_thumb.jpg"/></a></td><td class="left"><a href="https://raw.github.com/tontof/kriss_feed/master/style/vinc3r/user.css">css</a></td></tr>
+</tbody>
+<tbody>
+<tr><td class="left">xinfe</td><td class="left"><a href="img/style/xinfe.png"><img src="img/style/xinfe_thumb.jpg" alt="xinfe_thumb.jpg"/></a></td><td class="left"><a href="https://raw.github.com/tontof/kriss_feed/master/style/xinfe/user.css">css</a></td></tr>
+</tbody>
+</table>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> TODOs</h2>
+<div class="outline-text-2" id="text-5">
+
+<ul>
+<li>internationalization
+</li>
+<li>plugins
+</li>
+<li>fix css/html/js validation
+<ul>
+<li><a href="http://jigsaw.w3.org/css-validator/">http://jigsaw.w3.org/css-validator/</a>
+</li>
+<li><a href="http://validator.w3.org/">http://validator.w3.org/</a>
+</li>
+<li><a href="http://www.jshint.com/">http://www.jshint.com/</a>
+</li>
+</ul>
+
+</li>
+<li><a href="https://github.com/tontof/kriss_feed/issues/97">https://github.com/tontof/kriss_feed/issues/97</a>
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> FAQ (Frequently Ask Question)</h2>
+<div class="outline-text-2" id="text-6">
+
+
+</div>
+
+<div id="outline-container-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Why did I create KrISS feed ?</h3>
+<div class="outline-text-3" id="text-6-1">
+
+<p>   I was using Google Reader and when Google decided to <a href="http://googlereader.blogspot.fr/2011/10/upcoming-changes-to-reader-new-look-new.html">integrate Google+</a> it was for me the end (before the <a href="http://googlereader.blogspot.fr/2013/03/powering-down-google-reader.html">official one</a> on July 1,
+   2013): "As a result of these changes, we also think it's important
+   to clean things up a bit. Many of Reader's social features will
+   soon be available via Google+, so in a week's time we'll be
+   retiring things like friending, following and shared link blogs
+   inside of Reader."
+</p>
+<p>
+   I have looked at existing solutions (rssLounge, tiny tiny RSS, &hellip;)
+   but I was not happy so I've coded mine (as we say: "if you want
+   something done right, do it yourself").
+</p></div>
+
+</div>
+
+<div id="outline-container-6-2" class="outline-3">
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> What is KISS philosophy ?</h3>
+<div class="outline-text-3" id="text-6-2">
+
+<p>   The <a href="https://en.wikipedia.org/wiki/KISS_principle">KISS</a> principle has many definitions and everyone lets define
+   KISS as he wants. For me, KrISS feed should be as accessible as
+   possible for everyone. That's why, there is for example, no SQL
+   database to configure and a single file to copy for end users. But
+   it should also be smart and that's why source code is easy to
+   understand and well structured.
+</p>
+<p>
+   I'm not satisfied yet because there still a lot of work to do, but
+   hey, there are just 24 hours per day :-)
+</p></div>
+
+</div>
+
+<div id="outline-container-6-3" class="outline-3">
+<h3 id="sec-6-3"><span class="section-number-3">6.3</span> Why I can not add or update my feeds properly (Problem with last update) ?</h3>
+<div class="outline-text-3" id="text-6-3">
+
+<p>   First of all check your feed validity:
+   <a href="http://validator.w3.org/feed/">http://validator.w3.org/feed/</a>
+</p>
+<p>   
+   KrISS feed uses libxml2 and if the feed is not well formated, it
+   will fail. Contact the feed owner to tell him to correct his feed.
+</p>
+<p>
+   If the feed is correct, there could be server configuration
+   problems. For now KrISS feed errors are not very explicit, open an
+   issue on <a href="https://github.com/tontof/kriss_feed/issues">github</a> if you want more help.
+</p></div>
+
+</div>
+
+<div id="outline-container-6-4" class="outline-3">
+<h3 id="sec-6-4"><span class="section-number-3">6.4</span> Does it work on free.fr ?</h3>
+<div class="outline-text-3" id="text-6-4">
+
+<p>   No, external accesses are disabled since December 1, 2008.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> For developpers</h2>
+<div class="outline-text-2" id="text-7">
+
+
+</div>
+
+<div id="outline-container-7-1" class="outline-3">
+<h3 id="sec-7-1"><span class="section-number-3">7.1</span> How KrISS feed is organized ?</h3>
+<div class="outline-text-3" id="text-7-1">
+
+
+</div>
+
+<div id="outline-container-7-1-1" class="outline-4">
+<h4 id="sec-7-1-1"><span class="section-number-4">7.1.1</span> If you want to look at the code of KrISS feed, you have to look at <a href="https://github.com/tontof/kriss_feed/tree/master/src">src</a> directory:</h4>
+<div class="outline-text-4" id="text-7-1-1">
+
+<ul>
+<li><code>src</code>
+<ul>
+<li><code>class</code>: <b>directory for php classes</b>
+<ul>
+<li><code>tpl</code>: <b>directory for templates</b>
+<ul>
+<li><code>add_feed.tpl.php</code>
+</li>
+<li><code>change_password.tpl.php</code>
+</li>
+<li><code>config.tpl.php</code>
+</li>
+<li><code>edit_all.tpl.php</code>
+</li>
+<li><code>edit_feed.tpl.php</code>
+</li>
+<li><code>edit_folder.tpl.php</code>
+</li>
+<li><code>header.tpl.php</code>
+</li>
+<li><code>help.tpl.php</code>
+</li>
+<li><code>import.tpl.php</code>
+</li>
+<li><code>includes.tpl.php</code>
+</li>
+<li><code>index.tpl.php</code>
+</li>
+<li><code>install.tpl.php</code>
+</li>
+<li><code>list_feeds.tpl.php</code>
+</li>
+<li><code>list_items.tpl.php</code>
+</li>
+<li><code>login.tpl.php</code>
+</li>
+<li><code>nav.tpl.php</code>
+</li>
+<li><code>paging.tpl.php</code>
+</li>
+<li><code>status.tpl.php</code>
+</li>
+<li><code>update.tpl.php</code>
+</li>
+</ul>
+
+</li>
+<li><code>Feed.php</code>: <b>model</b>
+</li>
+<li><code>FeedConf.php</code>: <b>kriss feed configuration management</b>
+</li>
+<li><code>FeedPage.php</code>: <b>view</b>
+</li>
+<li><code>MyTool.php</code>: <b>common tools</b>
+</li>
+<li><code>Opml.php</code>: <b>import/export opml</b>
+</li>
+<li><code>PageBuilder.php</code>: <b>template management</b>
+</li>
+<li><code>Session.php</code>: <b>session management</b>
+</li>
+<li><code>Star.php</code>: <b>starred items management</b>
+</li>
+</ul>
+
+</li>
+<li><code>inc</code>: <b>directory for includes</b>
+<ul>
+<li><code>style.css</code>
+</li>
+<li><code>script.js</code>
+</li>
+<li><code>favicon.ico</code>
+</li>
+</ul>
+
+</li>
+<li><code>kriss_feed.php</code>: <b>controller</b>
+</li>
+<li><code>generateIndex</code>: <b>bash script to compile index.php file</b>
+</li>
+<li><code>index.php</code>: <b>developpement version</b>
+</li>
+</ul>
+
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-7-1-2" class="outline-4">
+<h4 id="sec-7-1-2"><span class="section-number-4">7.1.2</span> To modify KrISS feed you should not modify index.php as it is automatically compiled using <code>generateIndex</code> script</h4>
+<div class="outline-text-4" id="text-7-1-2">
+
+</div>
+
+</div>
+
+<div id="outline-container-7-1-3" class="outline-4">
+<h4 id="sec-7-1-3"><span class="section-number-4">7.1.3</span> When modifying KrISS feed you can see modification without compiling using <code>kriss_feed.php</code></h4>
+<div class="outline-text-4" id="text-7-1-3">
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2013-05-24 09:28:51 CEST</p>
+<p class="author">Author: Tontof</p>
+<p class="creator">Org version 7.8.02 with Emacs version 23</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

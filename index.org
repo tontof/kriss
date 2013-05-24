@@ -1,0 +1,13 @@
+#+OPTIONS:    toc:nil
+#+STARTUP:    align
+#+TITLE:      KrISS : simple and smart (or stupid) apps
+#+AUTHOR:     Tontof
+#+LANGUAGE:   en
+#+STYLE:      <style type="text/css"></style>
+#+LINK_UP:    .
+#+LINK_HOME:  .
+#+EXPORT_EXCLUDE_TAGS: noexport
+
+Here are juste my simple and smart (or stupid) apps:
+
+* [[./feed][KrISS feed]]: A simple and smart (or stupid) feed reader

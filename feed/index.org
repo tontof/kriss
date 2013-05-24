@@ -1,0 +1,168 @@
+#+OPTIONS:    toc:2
+#+STARTUP:    align
+#+TITLE:      KrISS feed
+#+AUTHOR:     Tontof
+#+LANGUAGE:   en
+#+STYLE:      <style type="text/css"></style>
+#+LINK_UP:    ..
+#+LINK_HOME:  ..
+#+EXPORT_EXCLUDE_TAGS: noexport
+
+KrISS feed is a simple and smart (or stupid) feed reader.
+To see an online example: http://tontof.net/feed
+
+* Features
+  - [[What is KISS philosophy ?][KISS]] philosophy (Keep It Simple and Smart)
+  - Fast (the fastest RSS reader ?)
+  - Easy to [[Installation][install]] (if you find an easier solution, I'm all ears)
+  - Easy to personnalize (default style is ugly ? Just go and see [[Style]])
+  - Easy to share with [[http://sebsauvage.net/wiki/doku.php?id=php:shaarli][Shaarli]] but also others sharing tools using GET parameters of URL
+  - Mobile support using responsive web design
+  - Customize everything such as menu, paging to keep only what you need
+  - Auto mark as read when going to next item
+  - Add favicon to feeds
+  - Public/protected/private visibility
+  - Update manually/using javascript/using cron
+  - Keep items as starred
+  - List or expanded view
+  - Order by newer or older items
+  - Show unread or all items
+  - [[http://tontof.net/feed/?help][Keyboard shorcuts]]
+  - OPML import/export
+* Requirements
+  - php 5.2
+  - your server should be able to download external content
+  - DOMDocument + libxml2 (install php-xml)
+  - mbstring (install php-mbstring)
+  - recommanded: curl (install php5-curl)
+* Installation
+  - Download index.php file:
+    - Stable version: [[https://raw.github.com/tontof/kriss_feed/master/index.php][index.php]]
+    - Development version: [[https://raw.github.com/tontof/kriss_feed/master/src/index.php][index.php]]
+  - Copy the index.php file on your web server
+  - Access this file in your browser
+  - Choose a login and a password and that's it !
+  - Now you can login, import your opml file and enjoy.
+* Style
+** How to customize KrISS feed
+That's easy you just have to create a =user.css= file into =inc= directory:
+- =index.php=
+- =inc=
+  - =user.css=
+That's it !
+** Screenshots
+To install a style, just download the corresponding css file and place
+into =inc= directory (rename into =user.css= if necessary).
+Some styles need other files as font.
+| author         | screenshots                             | files             |
+|----------------+-----------------------------------------+-------------------|
+| ali0une        | [[file:img/style/ali0une_white.jpg][file:img/style/ali0une_white_thumb.jpg]]  | [[https://raw.github.com/tontof/kriss_feed/master/style/ali0une/white.css][css]] ([[https://github.com/tontof/kriss_feed/tree/master/style/ali0une][other files]]) |
+|                | [[file:img/style/ali0une_black.jpg][file:img/style/ali0une_black_thumb.jpg]]  | [[https://raw.github.com/tontof/kriss_feed/master/style/ali0une/black.css][css]] ([[https://github.com/tontof/kriss_feed/tree/master/style/ali0une][other files]]) |
+|----------------+-----------------------------------------+-------------------|
+| bootstrap      | [[file:img/style/bootstrap.png][file:img/style/bootstrap_thumb.jpg]]      | [[https://raw.github.com/tontof/kriss_feed/master/style/bootstrap/bootstrap.css][css]]               |
+|----------------+-----------------------------------------+-------------------|
+| geocities      | [[file:img/style/geocities.png][file:img/style/geocities_thumb.jpg]]      | [[https://raw.github.com/tontof/kriss_feed/master/style/geocities/user.css][css]]               |
+|----------------+-----------------------------------------+-------------------|
+| greader        | [[file:img/style/greader.png][file:img/style/greader_thumb.jpg]]        | [[https://raw.github.com/tontof/kriss_feed/master/style/greader/user.css][css]]               |
+|----------------+-----------------------------------------+-------------------|
+| orangina-rouge | [[file:img/style/orangina-rouge.png][file:img/style/orangina-rouge_thumb.jpg]] | [[https://raw.github.com/tontof/kriss_feed/master/style/orangina-rouge/user.css][css]]               |
+|----------------+-----------------------------------------+-------------------|
+| p3ter          | [[file:img/style/p3ter.png][file:img/style/p3ter_thumb.jpg]]          | [[https://raw.github.com/tontof/kriss_feed/master/style/p3ter/user.css][css]]               |
+|----------------+-----------------------------------------+-------------------|
+| pierre         | [[file:img/style/pierre.png][file:img/style/pierre_thumb.jpg]]         | [[https://raw.github.com/tontof/kriss_feed/master/style/pierre/user.css][css]]               |
+|----------------+-----------------------------------------+-------------------|
+| sebsauvage     | [[file:img/style/sebsauvage.png][file:img/style/sebsauvage_thumb.jpg]]     | [[https://raw.github.com/tontof/kriss_feed/master/style/sebsauvage/user.css][css]]               |
+|----------------+-----------------------------------------+-------------------|
+| tvelter        | [[file:img/style/tvelter.png][file:img/style/tvelter_thumb.jpg]]        | [[https://raw.github.com/tontof/kriss_feed/master/style/tvelter/user.css][css]]               |
+|----------------+-----------------------------------------+-------------------|
+| vinc3r         | [[file:img/style/vinc3r.jpg][file:img/style/vinc3r_thumb.jpg]]         | [[https://raw.github.com/tontof/kriss_feed/master/style/vinc3r/user.css][css]]               |
+|----------------+-----------------------------------------+-------------------|
+| xinfe          | [[file:img/style/xinfe.png][file:img/style/xinfe_thumb.jpg]]          | [[https://raw.github.com/tontof/kriss_feed/master/style/xinfe/user.css][css]]               |
+|----------------+-----------------------------------------+-------------------|
+* TODOs
+  - internationalization
+  - plugins
+  - fix css/html/js validation
+    - http://jigsaw.w3.org/css-validator/
+    - http://validator.w3.org/
+    - http://www.jshint.com/
+  - https://github.com/tontof/kriss_feed/issues/97
+* FAQ (Frequently Ask Question)
+** Why did I create KrISS feed ?
+   I was using Google Reader and when Google decided to [[http://googlereader.blogspot.fr/2011/10/upcoming-changes-to-reader-new-look-new.html][integrate
+   Google+]] it was for me the end (before the [[http://googlereader.blogspot.fr/2013/03/powering-down-google-reader.html][official one]] on July 1,
+   2013): "As a result of these changes, we also think it's important
+   to clean things up a bit. Many of Reader's social features will
+   soon be available via Google+, so in a week's time we'll be
+   retiring things like friending, following and shared link blogs
+   inside of Reader."
+
+   I have looked at existing solutions (rssLounge, tiny tiny RSS, ...)
+   but I was not happy so I've coded mine (as we say: "if you want
+   something done right, do it yourself").
+** What is KISS philosophy ?
+   The [[https://en.wikipedia.org/wiki/KISS_principle][KISS]] principle has many definitions and everyone lets define
+   KISS as he wants. For me, KrISS feed should be as accessible as
+   possible for everyone. That's why, there is for example, no SQL
+   database to configure and a single file to copy for end users. But
+   it should also be smart and that's why source code is easy to
+   understand and well structured.
+
+   I'm not satisfied yet because there still a lot of work to do, but
+   hey, there are just 24 hours per day :-)
+** Why I can not add or update my feeds properly (Problem with last update) ?
+   First of all check your feed validity:
+   http://validator.w3.org/feed/
+   
+   KrISS feed uses libxml2 and if the feed is not well formated, it
+   will fail. Contact the feed owner to tell him to correct his feed.
+
+   If the feed is correct, there could be server configuration
+   problems. For now KrISS feed errors are not very explicit, open an
+   issue on [[https://github.com/tontof/kriss_feed/issues][github]] if you want more help.
+** Does it work on free.fr ?
+   No, external accesses are disabled since December 1, 2008.
+
+* For developpers
+** How KrISS feed is organized ?
+*** If you want to look at the code of KrISS feed, you have to look at [[https://github.com/tontof/kriss_feed/tree/master/src][src]] directory:
+    - =src=
+      - =class=: *directory for php classes*
+        - =tpl=: *directory for templates*
+          - =add\_feed.tpl.php=
+          - =change\_password.tpl.php=
+          - =config.tpl.php=
+          - =edit\_all.tpl.php=
+          - =edit\_feed.tpl.php=
+          - =edit\_folder.tpl.php=
+          - =header.tpl.php=
+          - =help.tpl.php=
+          - =import.tpl.php=
+          - =includes.tpl.php=
+          - =index.tpl.php=
+          - =install.tpl.php=
+          - =list\_feeds.tpl.php=
+          - =list\_items.tpl.php=
+          - =login.tpl.php=
+          - =nav.tpl.php=
+          - =paging.tpl.php=
+          - =status.tpl.php=
+          - =update.tpl.php=
+        - =Feed.php=: *model*
+        - =FeedConf.php=: *kriss feed configuration management*
+        - =FeedPage.php=: *view*
+        - =MyTool.php=: *common tools*
+        - =Opml.php=: *import/export opml*
+        - =PageBuilder.php=: *template management*
+        - =Session.php=: *session management*
+        - =Star.php=: *starred items management*
+      - =inc=: *directory for includes*
+        - =style.css=
+        - =script.js=
+        - =favicon.ico=
+      - =kriss\_feed.php=: *controller*
+      - =generateIndex=: *bash script to compile index.php file*
+      - =index.php=: *developpement version*
+*** To modify KrISS feed you should not modify index.php as it is automatically compiled using =generateIndex= script
+*** When modifying KrISS feed you can see modification without compiling using =kriss\_feed.php=
+    
