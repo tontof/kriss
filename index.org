@@ -8,6 +8,15 @@
 #+LINK_HOME:  .
 #+EXPORT_EXCLUDE_TAGS: noexport
 
-Here are juste my simple and smart (or stupid) apps:
-
-* [[./feed][KrISS feed]]: A simple and smart (or stupid) feed reader
+* Here are juste my simple and smart (or stupid) php apps:
+** [[./blog][KrISS blog]]: A simple and smart (or stupid) blogging tool        :noexport:
+** [[./feed][KrISS feed]]: A simple and smart (or stupid) feed reader
+** KrISS file: A simple and smart (or stupid) file manager         :noexport:
+** KrISS link: A simple and smart (or stupid) shaarli              :noexport:
+** KrISS pass: A simple and smart (or stupid) password manager     :noexport:
+** KrISS pipl: A simple and smart (or stupid) contact manager      :noexport:
+** KrISS prox: A simple and smart (or stupid) proxy                :noexport:
+* Here are juste my simple and smart (or stupid) bookmarklets:     :noexport:
+** KrISS vidz: A simple and smart (or stupid) videos downloader    :noexport:
+** KrISS html: A simple and smart (or stupid) html page manager    :noexport:
+  

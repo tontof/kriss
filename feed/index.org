@@ -50,6 +50,26 @@ That's easy you just have to create a =user.css= file into =inc= directory:
 - =inc=
   - =user.css=
 That's it !
+** How to colorize odd and even feeds/items
+Inspired from [[https://github.com/tontof/kriss_feed/blob/master/style/xinfe/user.css][Xinfe style]]
+*** For feeds
+#+begin_src css
+li.feed:nth-child(odd){
+    background: rgba(0, 255, 0, 0.06);
+}
+li.feed:nth-child(even){
+    background: rgba(0, 0, 255, 0.06);
+}
+#+end_src
+*** For items
+#+begin_src css
+li.item-list:nth-child(odd){
+    background: rgba(0, 255, 0, 0.06);
+}
+li.item-list:nth-child(even){
+    background: rgba(0, 0, 255, 0.06);
+}
+#+end_src
 ** Screenshots
 To install a style, just download the corresponding css file and place
 into =inc= directory (rename into =user.css= if necessary).

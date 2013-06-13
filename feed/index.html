@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="KrISS feed"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2013-05-24 09:28:51 CEST"/>
+<meta name="generated" content="2013-06-13 16:49:22 CEST"/>
 <meta name="author" content="Tontof"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -113,7 +113,8 @@ To see an online example: <a href="http://tontof.net/feed">http://tontof.net/fee
 <li><a href="#sec-4">4 Style</a>
 <ul>
 <li><a href="#sec-4-1">4.1 How to customize KrISS feed</a></li>
-<li><a href="#sec-4-2">4.2 Screenshots</a></li>
+<li><a href="#sec-4-2">4.2 How to colorize odd and even feeds/items</a></li>
+<li><a href="#sec-4-3">4.3 Screenshots</a></li>
 </ul>
 </li>
 <li><a href="#sec-5">5 TODOs</a></li>
@@ -258,8 +259,55 @@ To see an online example: <a href="http://tontof.net/feed">http://tontof.net/fee
 </div>
 
 <div id="outline-container-4-2" class="outline-3">
-<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Screenshots</h3>
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> How to colorize odd and even feeds/items</h3>
 <div class="outline-text-3" id="text-4-2">
+
+<p>Inspired from <a href="https://github.com/tontof/kriss_feed/blob/master/style/xinfe/user.css">Xinfe style</a>
+</p>
+</div>
+
+<div id="outline-container-4-2-1" class="outline-4">
+<h4 id="sec-4-2-1"><span class="section-number-4">4.2.1</span> For feeds</h4>
+<div class="outline-text-4" id="text-4-2-1">
+
+
+
+
+<pre class="src src-css">li.feed:nth-child(odd){
+    <span style="color: #eedd82;">background</span>: rgba(0, 255, 0, 0.06);
+}
+li.feed:nth-child(even){
+    <span style="color: #eedd82;">background</span>: rgba(0, 0, 255, 0.06);
+}
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-4-2-2" class="outline-4">
+<h4 id="sec-4-2-2"><span class="section-number-4">4.2.2</span> For items</h4>
+<div class="outline-text-4" id="text-4-2-2">
+
+
+
+
+<pre class="src src-css">li.item-list:nth-child(odd){
+    <span style="color: #eedd82;">background</span>: rgba(0, 255, 0, 0.06);
+}
+li.item-list:nth-child(even){
+    <span style="color: #eedd82;">background</span>: rgba(0, 0, 255, 0.06);
+}
+</pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Screenshots</h3>
+<div class="outline-text-3" id="text-4-3">
 
 <p>To install a style, just download the corresponding css file and place
 into <code>inc</code> directory (rename into <code>user.css</code> if necessary).
@@ -545,7 +593,7 @@ Some styles need other files as font.
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2013-05-24 09:28:51 CEST</p>
+<p class="date">Date: 2013-06-13 16:49:22 CEST</p>
 <p class="author">Author: Tontof</p>
 <p class="creator">Org version 7.8.02 with Emacs version 23</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
