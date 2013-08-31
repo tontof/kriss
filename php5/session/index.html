@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>KrISS php5</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2013-08-31 14:16:57 CEST"/>
+<meta name="generated" content="2013-08-31 14:31:20 CEST"/>
 <meta name="author" content="Tontof"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -298,7 +298,11 @@ redirects to login page.
         <span class="org-keyword">if</span> (<span class="org-default">dirname(</span>$<span class="org-constant">_SERVER</span>[<span class="org-string">'SCRIPT_NAME'</span>])!=<span class="org-string">'/'</span>) {
             $<span class="org-variable-name">cookiedir</span> = <span class="org-default">dirname(</span>$<span class="org-constant">_SERVER</span>[<span class="org-string">"SCRIPT_NAME"</span>]).<span class="org-string">'/'</span>;
         }
-        <span class="org-default">session_set_cookie_params(</span>$<span class="org-variable-name">cookie</span>[<span class="org-string">'lifetime'</span>], $<span class="org-variable-name">cookiedir</span>);
+        $<span class="org-variable-name">ssl</span> = <span class="org-constant">false</span>;
+        <span class="org-keyword">if</span> (<span class="org-default">isset(</span>$<span class="org-constant">_SERVER</span>[<span class="org-string">"HTTPS"</span>]) &amp;&amp; $<span class="org-constant">_SERVER</span>[<span class="org-string">"HTTPS"</span>] == <span class="org-string">"on"</span>) {
+            $<span class="org-variable-name">ssl</span> = <span class="org-constant">true</span>;
+        }
+        <span class="org-default">session_set_cookie_params(</span>$<span class="org-variable-name">cookie</span>[<span class="org-string">'lifetime'</span>], $<span class="org-variable-name">cookiedir</span>, $<span class="org-variable-name">cookie</span>[<span class="org-string">'domain'</span>], $<span class="org-variable-name">ssl</span>);
         <span class="org-comment-delimiter">// </span><span class="org-comment">Use cookies to store session.
 </span>        <span class="org-default">ini_set(</span><span class="org-string">'session.use_cookies'</span>, <span class="org-default">1</span>);
         <span class="org-comment-delimiter">// </span><span class="org-comment">Force cookies for session  (phpsessionID forbidden in URL)
@@ -444,7 +448,7 @@ redirects to login page.
         <span class="org-keyword">if</span> (<span class="org-constant">self</span>::$<span class="org-variable-name">banFile</span> !== <span class="org-string">''</span>) {
             $<span class="org-variable-name">ip</span> = $<span class="org-constant">_SERVER</span>[<span class="org-string">"REMOTE_ADDR"</span>];
             $<span class="org-variable-name">gb</span> = $<span class="org-constant">GLOBALS</span>[<span class="org-string">'IPBANS'</span>];
-            
+
             <span class="org-keyword">if</span> (!<span class="org-default">isset(</span>$<span class="org-variable-name">gb</span>[<span class="org-string">'FAILURES'</span>][$<span class="org-variable-name">ip</span>])) {
                 $<span class="org-variable-name">gb</span>[<span class="org-string">'FAILURES'</span>][$<span class="org-variable-name">ip</span>] = <span class="org-default">0</span>;
             }
@@ -452,7 +456,7 @@ redirects to login page.
             <span class="org-keyword">if</span> ($<span class="org-variable-name">gb</span>[<span class="org-string">'FAILURES'</span>][$<span class="org-variable-name">ip</span>] &gt; (<span class="org-constant">self</span>::$<span class="org-variable-name">banAfter</span> - <span class="org-default">1</span>)) {
                 $<span class="org-variable-name">gb</span>[<span class="org-string">'BANS'</span>][$<span class="org-variable-name">ip</span>]= <span class="org-default">time(</span>) + <span class="org-constant">self</span>::$<span class="org-variable-name">banDuration</span>;
             }
-            
+
             $<span class="org-constant">GLOBALS</span>[<span class="org-string">'IPBANS'</span>] = $<span class="org-variable-name">gb</span>;
             <span class="org-default">file_put_contents(</span><span class="org-constant">self</span>::$<span class="org-variable-name">banFile</span>, <span class="org-string">"&lt;?php\n\$GLOBALS['IPBANS']="</span>.<span class="org-default">var_export(</span>$<span class="org-variable-name">gb</span>, <span class="org-constant">true</span>).<span class="org-string">";\n?&gt;"</span>);
         }
@@ -502,10 +506,10 @@ redirects to login page.
 </span>                    <span class="org-default">unset(</span>$<span class="org-variable-name">gb</span>[<span class="org-string">'FAILURES'</span>][$<span class="org-variable-name">ip</span>]);
                     <span class="org-default">unset(</span>$<span class="org-variable-name">gb</span>[<span class="org-string">'BANS'</span>][$<span class="org-variable-name">ip</span>]);
                     <span class="org-default">file_put_contents(</span><span class="org-constant">self</span>::$<span class="org-variable-name">banFile</span>, <span class="org-string">"&lt;?php\n\$GLOBALS['IPBANS']="</span>.<span class="org-default">var_export(</span>$<span class="org-variable-name">gb</span>, <span class="org-constant">true</span>).<span class="org-string">";\n?&gt;"</span>);
-                    
+
                     <span class="org-keyword">return</span> <span class="org-constant">true</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">Ban has expired, user can login.
 </span>                }
-                
+
                 <span class="org-keyword">return</span> <span class="org-constant">false</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">User is banned.
 </span>            }
         }
@@ -574,7 +578,7 @@ redirects to login page.
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2013-08-31 14:16:57 CEST</p>
+<p class="date"> Date: 2013-08-31 14:31:20 CEST</p>
 </div>
 </div>
 </body>
