@@ -1,0 +1,19 @@
+#+OPTIONS:    toc:1 author:nil creator:nil
+#+STARTUP:    align
+#+TITLE:      KrISS php5
+#+AUTHOR:     Tontof
+#+LANGUAGE:   en
+#+STYLE:      <style type="text/css"></style>
+#+LINK_UP:    ..
+#+LINK_HOME:  ..
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+STYLE: <link rel="stylesheet" type="text/css" href="../inc/style.css" />
+
+KrISS php5 is a simple and smart (or stupid) php5 snippets repository.
+
+All the code follow the KISS philosophy (Keep It Simple and Smart).
+
+Feel free to contribute: https://github.com/tontof/kriss_php5
+
+ - [[./session][Session.php]]: A session management class
+ - [[./rss][Rss.php]]: A rss/atom parser class

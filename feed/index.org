@@ -1,4 +1,4 @@
-#+OPTIONS:    toc:2
+#+OPTIONS:    toc:2 author:nil creator:nil
 #+STARTUP:    align
 #+TITLE:      KrISS feed
 #+AUTHOR:     Tontof
@@ -7,15 +7,22 @@
 #+LINK_UP:    ..
 #+LINK_HOME:  ..
 #+EXPORT_EXCLUDE_TAGS: noexport
+#+STYLE: <link rel="stylesheet" type="text/css" href="../inc/style.css" />
 
 KrISS feed is a simple and smart (or stupid) feed reader.
+
 To see an online example: http://tontof.net/feed
 
+Feel free to contribute: https://github.com/tontof/kriss_feed
+
 * Features
-  - [[What is KISS philosophy ?][KISS]] philosophy (Keep It Simple and Smart)
+  :PROPERTIES:
+  :CUSTOM_ID: features
+  :END:
+  - [[#kiss][KISS]] philosophy (Keep It Simple and Smart)
   - Fast (the fastest RSS reader ?)
-  - Easy to [[Installation][install]] (if you find an easier solution, I'm all ears)
-  - Easy to personnalize (default style is ugly ? Just go and see [[Style]])
+  - Easy to [[#installation][install]] (if you find an easier solution, I'm all ears)
+  - Easy to personnalize (default style is ugly ? Just go and see [[#style][Style]])
   - Easy to share with [[http://sebsauvage.net/wiki/doku.php?id=php:shaarli][Shaarli]] but also others sharing tools using GET parameters of URL
   - Mobile support using responsive web design
   - Customize everything such as menu, paging to keep only what you need
@@ -30,29 +37,47 @@ To see an online example: http://tontof.net/feed
   - [[http://tontof.net/feed/?help][Keyboard shorcuts]]
   - OPML import/export
 * Requirements
+  :PROPERTIES:
+  :CUSTOM_ID: requirements
+  :END:
   - php 5.2
   - your server should be able to download external content
   - DOMDocument + libxml2 (install php-xml)
   - mbstring (install php-mbstring)
   - recommanded: curl (install php5-curl)
 * Installation
+  :PROPERTIES:
+  :CUSTOM_ID: installation
+  :END:
   - Download index.php file:
     - Stable version: [[https://raw.github.com/tontof/kriss_feed/master/index.php][index.php]]
     - Development version: [[https://raw.github.com/tontof/kriss_feed/master/src/index.php][index.php]]
   - Copy the index.php file on your web server
   - Access this file in your browser
   - Choose a login and a password and that's it !
-  - Now you can login, import your opml file and enjoy.
+  - Now you can sign in, import your opml file and enjoy.
 * Style
+  :PROPERTIES:
+  :CUSTOM_ID: style
+  :END:
 ** How to customize KrISS feed
+  :PROPERTIES:
+  :CUSTOM_ID: css-user
+  :END:
 That's easy you just have to create a =user.css= file into =inc= directory:
 - =index.php=
 - =inc=
   - =user.css=
 That's it !
 ** How to colorize odd and even feeds/items
+  :PROPERTIES:
+  :CUSTOM_ID: css-odd-even-feeds-items
+  :END:
 Inspired from [[https://github.com/tontof/kriss_feed/blob/master/style/xinfe/user.css][Xinfe style]]
 *** For feeds
+  :PROPERTIES:
+  :CUSTOM_ID: css-odd-even-feeds
+  :END:
 #+begin_src css
 li.feed:nth-child(odd){
     background: rgba(0, 255, 0, 0.06);
@@ -62,6 +87,9 @@ li.feed:nth-child(even){
 }
 #+end_src
 *** For items
+  :PROPERTIES:
+  :CUSTOM_ID: css-odd-even-items
+  :END:
 #+begin_src css
 li.item-list:nth-child(odd){
     background: rgba(0, 255, 0, 0.06);
@@ -71,6 +99,9 @@ li.item-list:nth-child(even){
 }
 #+end_src
 ** Screenshots
+  :PROPERTIES:
+  :CUSTOM_ID: screenshots
+  :END:
 To install a style, just download the corresponding css file and place
 into =inc= directory (rename into =user.css= if necessary).
 Some styles need other files as font.
@@ -99,16 +130,26 @@ Some styles need other files as font.
 |----------------+-----------------------------------------+-------------------|
 | xinfe          | [[file:img/style/xinfe.png][file:img/style/xinfe_thumb.jpg]]          | [[https://raw.github.com/tontof/kriss_feed/master/style/xinfe/user.css][css]]               |
 |----------------+-----------------------------------------+-------------------|
+|                |                                         |                   |
 * TODOs
-  - internationalization
-  - plugins
-  - fix css/html/js validation
-    - http://jigsaw.w3.org/css-validator/
-    - http://validator.w3.org/
-    - http://www.jshint.com/
+  :PROPERTIES:
+  :CUSTOM_ID: todo
+  :END:
+  - fix css/html/js/php validation
+    - css : http://jigsaw.w3.org/css-validator/
+    - html : http://validator.w3.org/
+    - js : http://www.jshint.com/
+    - php : https://github.com/opensky/Symfony2-coding-standard
+    - opml : http://validator.opml.org (OK)
   - https://github.com/tontof/kriss_feed/issues/97
 * FAQ (Frequently Ask Question)
+  :PROPERTIES:
+  :CUSTOM_ID: faq
+  :END:
 ** Why did I create KrISS feed ?
+  :PROPERTIES:
+  :CUSTOM_ID: why
+  :END:
    I was using Google Reader and when Google decided to [[http://googlereader.blogspot.fr/2011/10/upcoming-changes-to-reader-new-look-new.html][integrate
    Google+]] it was for me the end (before the [[http://googlereader.blogspot.fr/2013/03/powering-down-google-reader.html][official one]] on July 1,
    2013): "As a result of these changes, we also think it's important
@@ -121,6 +162,9 @@ Some styles need other files as font.
    but I was not happy so I've coded mine (as we say: "if you want
    something done right, do it yourself").
 ** What is KISS philosophy ?
+  :PROPERTIES:
+  :CUSTOM_ID: kiss
+  :END:
    The [[https://en.wikipedia.org/wiki/KISS_principle][KISS]] principle has many definitions and everyone lets define
    KISS as he wants. For me, KrISS feed should be as accessible as
    possible for everyone. That's why, there is for example, no SQL
@@ -130,21 +174,51 @@ Some styles need other files as font.
 
    I'm not satisfied yet because there still a lot of work to do, but
    hey, there are just 24 hours per day :-)
-** Why I can not add or update my feeds properly (Problem with last update) ?
+** Why I can not add or update my feeds properly ?
+  :PROPERTIES:
+  :CUSTOM_ID: feed-validation
+  :END:
    First of all check your feed validity:
    http://validator.w3.org/feed/
    
    KrISS feed uses libxml2 and if the feed is not well formated, it
    will fail. Contact the feed owner to tell him to correct his feed.
-
-   If the feed is correct, there could be server configuration
-   problems. For now KrISS feed errors are not very explicit, open an
-   issue on [[https://github.com/tontof/kriss_feed/issues][github]] if you want more help.
 ** Does it work on free.fr ?
+  :PROPERTIES:
+  :CUSTOM_ID: free-dot-fr
+  :END:
    No, external accesses are disabled since December 1, 2008.
-
+** How to reset KrISS feed password ?
+  :PROPERTIES:
+  :CUSTOM_ID: reset-password
+  :END:
+   You can not reset KrISS feed password, if you forgot your password
+   simply delete the data/config.php file and display the page again. You
+   will be asked for a new login/password.
+** How to stay signed in ?
+  :PROPERTIES:
+  :CUSTOM_ID: stay-signed-in
+  :END:
+For KrISS feed version 8. If it does not exist, create =plugins= and
+=sessions= directories.  Create a file =session.php= inside =plugins=
+directory and add these lines :
+#+begin_src php
+<?php
+ini_set("session.gc_maxlifetime", '86400');
+ini_set('session.save_path', $_SERVER['DOCUMENT_ROOT'].'/sessions');
+#+end_src php
+It will create php session files into =sessions= directory.
+You will then be connected for 1 day : 86400 = 24*60*60.
+Think to delete session files into =sessions= directory from time to time.
+This is not compatible if memcache is activated.
 * For developpers
+  :PROPERTIES:
+  :CUSTOM_ID: dev
+  :END:
 ** How KrISS feed is organized ?
+  :PROPERTIES:
+  :CUSTOM_ID: dev-src
+  :END:
 *** If you want to look at the code of KrISS feed, you have to look at [[https://github.com/tontof/kriss_feed/tree/master/src][src]] directory:
     - =src=
       - =class=: *directory for php classes*
@@ -184,5 +258,5 @@ Some styles need other files as font.
       - =generateIndex=: *bash script to compile index.php file*
       - =index.php=: *developpement version*
 *** To modify KrISS feed you should not modify index.php as it is automatically compiled using =generateIndex= script
-*** When modifying KrISS feed you can see modification without compiling using =kriss\_feed.php=
+*** When modifying KrISS feed you can see modifications without compiling using =kriss\_feed.php=
     

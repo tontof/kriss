@@ -1,0 +1,933 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title>KrISS php5</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2013-08-31 12:04:20 CEST"/>
+<meta name="author" content="Tontof"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<style type="text/css"></style>
+<link rel="stylesheet" type="text/css" href="../../inc/style.css" />
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+ <a accesskey="h" href=".."> UP </a>
+ |
+ <a accesskey="H" href="../.."> HOME </a>
+</div>
+
+<h1 class="title">KrISS php5</h1>
+
+<p>This rss class is developped for <a href="../../feed">KrISS feed</a> but is useful for parsing
+rss/atom feed or xml file.
+</p>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#features">1 Features </a></li>
+<li><a href="#how">2 How to use </a>
+<ul>
+<li><a href="#demo">2.1 demo.php </a></li>
+<li><a href="#sec-2.2">2.2 Rss.php </a></li>
+</ul>
+</li>
+<li><a href="#options">3 Advanced options </a>
+<ul>
+<li><a href="#sec-3.1">3.1 Child selection <b>&gt;</b> </a></li>
+<li><a href="#sec-3.2">3.2 Attribute selection <b>[attribute]</b> </a></li>
+<li><a href="#sec-3.3">3.3 Conditionnal selection <b>[attribute=value]</b> </a></li>
+<li><a href="#sec-3.4">3.4 Star selection and customization </a></li>
+<li><a href="#advanced-demo">3.5 Advanced demo </a></li>
+</ul>
+</li>
+<li><a href="#alternatives">4 See alternatives </a></li>
+<li><a href="#info">5 More infos about RSS/Atom </a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-features" class="outline-2">
+<h2 id="features"><a name="sec-1" id="sec-1"></a><span class="section-number-2">1</span> Features </h2>
+<div class="outline-text-2" id="text-features">
+
+<ul>
+<li>
+Only depends on libxml2 library (no SimpleXML or other)
+</li>
+<li>
+Xml validity is performed by libxml2
+</li>
+<li>
+Parse rdf:RDF, rss, atom feeds
+</li>
+<li>
+Let you customize what information you want with simple syntax
+</li>
+<li>
+Created for rss/atom feed but useful for common xml format
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-how" class="outline-2">
+<h2 id="how"><a name="sec-2" id="sec-2"></a><span class="section-number-2">2</span> How to use </h2>
+<div class="outline-text-2" id="text-how">
+
+
+</div>
+
+<div id="outline-container-demo" class="outline-3">
+<h3 id="demo"><a name="sec-2.1" id="sec-2.1"></a><span class="section-number-3">2.1</span> demo.php </h3>
+<div class="outline-text-3" id="text-demo">
+
+<p>This <a href="./demo.php">demo</a> page lets you get RSS/Atom items.
+</p>
+
+
+<pre class="src src-php"><span class="org-preprocessor">&lt;?php</span> 
+    <span class="org-keyword">include</span> <span class="org-string">'Rss.php'</span>;
+    <span class="org-keyword">if</span> (<span class="org-default">isset(</span>$<span class="org-constant">_POST</span>[<span class="org-string">'url'</span>])) {
+        $<span class="org-variable-name">data</span> = <span class="org-default">file_get_contents(</span>
+            <span class="org-default">filter_var(</span>$<span class="org-constant">_POST</span>[<span class="org-string">'url'</span>], <span class="org-warning">FILTER_VALIDATE_URL</span>)
+        );
+        $<span class="org-variable-name">rss</span> = <span class="org-type">Rss</span>::<span class="org-default">loadDom(</span>$<span class="org-variable-name">data</span>);
+        <span class="org-keyword">if</span> (<span class="org-default">empty(</span>$<span class="org-variable-name">rss</span>[<span class="org-string">'error'</span>])) {
+            $<span class="org-variable-name">dom</span> = $<span class="org-variable-name">rss</span>[<span class="org-string">'dom'</span>];
+            $<span class="org-variable-name">max</span> = -<span class="org-default">1</span>;
+            <span class="org-keyword">if</span> (!<span class="org-default">empty(</span>$<span class="org-constant">_POST</span>[<span class="org-string">'max'</span>])) {
+                $<span class="org-variable-name">max</span> = (<span class="org-type">int</span>) $<span class="org-constant">_POST</span>[<span class="org-string">'max'</span>];
+            }
+        } <span class="org-keyword">else</span> {
+            $<span class="org-variable-name">error</span> = $<span class="org-variable-name">rss</span>[<span class="org-string">'error'</span>];
+        }
+    }
+<span class="org-preprocessor">?&gt;</span>
+<span class="org-constant">&lt;!DOCTYPE</span> <span class="org-warning">html</span><span class="org-constant">&gt;</span>
+<span class="org-constant">&lt;html&gt;</span>
+  <span class="org-constant">&lt;head&gt;</span>
+    <span class="org-constant">&lt;title&gt;</span><span class="org-warning">Rss</span><span class="org-constant">&lt;/title&gt;</span>
+    <span class="org-constant">&lt;meta</span> <span class="org-constant">charset=</span><span class="org-string">"utf-8"</span><span class="org-constant">&gt;</span>
+  <span class="org-constant">&lt;/head&gt;</span>
+  <span class="org-constant">&lt;body&gt;</span>
+    <span class="org-constant">&lt;form</span> <span class="org-constant">method=</span><span class="org-string">"post"</span> <span class="org-constant">action=</span><span class="org-string">""</span><span class="org-constant">&gt;</span>
+      <span class="org-warning">Url</span> : <span class="org-constant">&lt;input</span> <span class="org-constant">type=</span><span class="org-string">"text"</span> <span class="org-constant">name=</span><span class="org-string">"url"</span><span class="org-constant">&gt;&lt;br&gt;</span>
+      <span class="org-warning">Max</span> <span class="org-warning">items</span> : <span class="org-constant">&lt;input</span> <span class="org-constant">type=</span><span class="org-string">"text"</span> <span class="org-constant">name=</span><span class="org-string">"max"</span><span class="org-constant">&gt;&lt;br&gt;</span>
+      <span class="org-constant">&lt;input</span> <span class="org-constant">type=</span><span class="org-string">"submit"</span> <span class="org-constant">value=</span><span class="org-string">"Submit"</span><span class="org-constant">&gt;</span>
+    <span class="org-constant">&lt;/form&gt;</span>
+    <span class="org-preprocessor">&lt;?php</span>
+        <span class="org-keyword">if</span> (!<span class="org-default">empty(</span>$<span class="org-variable-name">error</span>)) {
+            <span class="org-keyword">echo</span> $<span class="org-variable-name">error</span>;
+        }
+        <span class="org-keyword">if</span> (<span class="org-default">isset(</span>$<span class="org-variable-name">dom</span>)) {
+            $<span class="org-variable-name">feed</span> = <span class="org-type">Rss</span>::<span class="org-default">getFeed(</span>$<span class="org-variable-name">dom</span>);
+            $<span class="org-variable-name">items</span> = <span class="org-type">Rss</span>::<span class="org-default">getItems(</span>$<span class="org-variable-name">dom</span>, $<span class="org-variable-name">max</span>);
+    <span class="org-preprocessor">?&gt;</span>
+<span class="org-constant">&lt;a</span>
+  <span class="org-warning">href</span>=<span class="org-string">"&lt;?php echo htmlspecialchars($feed['htmlUrl']); ?&gt;"</span>
+  <span class="org-warning">title</span>=<span class="org-string">"&lt;?php echo htmlspecialchars($feed['description']); ?&gt;"</span>
+&gt;
+<span class="org-preprocessor">&lt;?php</span> <span class="org-keyword">echo</span> <span class="org-default">htmlspecialchars(</span>$<span class="org-variable-name">feed</span>[<span class="org-string">'title'</span>]); <span class="org-preprocessor">?&gt;</span>
+<span class="org-constant">&lt;/a&gt;</span> :
+<span class="org-constant">&lt;ol&gt;</span>
+<span class="org-preprocessor">&lt;?php</span>
+  <span class="org-keyword">foreach</span>($<span class="org-variable-name">items</span> <span class="org-keyword">as</span> $<span class="org-variable-name">item</span>) {
+<span class="org-preprocessor">?&gt;</span>
+    <span class="org-constant">&lt;li&gt;</span>
+      <span class="org-constant">&lt;a</span> <span class="org-constant">href=</span><span class="org-string">"&lt;?php echo htmlspecialchars($item['link']); ?&gt;"</span>&gt;<span class="org-preprocessor">&lt;?php</span> <span class="org-keyword">echo</span> <span class="org-default">htmlspecialchars(</span>$<span class="org-variable-name">item</span>[<span class="org-string">'title'</span>]); <span class="org-preprocessor">?&gt;</span><span class="org-constant">&lt;/a&gt;&lt;br&gt;</span>
+      <span class="org-constant">&lt;em&gt;</span><span class="org-preprocessor">&lt;?php</span> <span class="org-keyword">echo</span> <span class="org-default">utf8_encode(strftime(</span><span class="org-string">'%A %d %B %Y - %H:%M'</span>, <span class="org-default">strtotime(</span>$<span class="org-variable-name">item</span>[<span class="org-string">'time'</span>]))); <span class="org-preprocessor">?&gt;</span><span class="org-constant">&lt;/em&gt;</span>
+      <span class="org-warning">by</span> <span class="org-constant">&lt;strong&gt;</span><span class="org-preprocessor">&lt;?php</span> <span class="org-keyword">echo</span> <span class="org-default">htmlspecialchars(</span>$<span class="org-variable-name">item</span>[<span class="org-string">'author'</span>]); <span class="org-preprocessor">?&gt;</span><span class="org-constant">&lt;/strong&gt;&lt;br&gt;</span>
+      <span class="org-preprocessor">&lt;?php</span> <span class="org-keyword">echo</span> <span class="org-default">substr(htmlspecialchars(strip_tags(</span>$<span class="org-variable-name">item</span>[<span class="org-string">'content'</span>])), <span class="org-default">0</span>, <span class="org-default">100</span>).<span class="org-string">'...'</span>; <span class="org-preprocessor">?&gt;</span>
+    <span class="org-constant">&lt;/li&gt;</span>
+<span class="org-preprocessor">&lt;?php</span>
+  }
+<span class="org-preprocessor">?&gt;</span>
+<span class="org-constant">&lt;/ol&gt;</span>
+    <span class="org-preprocessor">&lt;?php</span>
+        }
+    <span class="org-preprocessor">?&gt;</span>
+  <span class="org-constant">&lt;/body&gt;</span>
+<span class="org-constant">&lt;/html&gt;</span>
+</pre>
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2.2" class="outline-3">
+<h3 id="sec-2.2"><span class="section-number-3">2.2</span> Rss.php </h3>
+<div class="outline-text-3" id="text-2.2">
+
+<p>The Rss class is available on github : <a href="https://raw.github.com/tontof/kriss_php5/master/Rss.php">https://raw.github.com/tontof/kriss_php5/master/Rss.php</a>
+</p>
+
+
+
+<pre class="src src-php"><span class="org-preprocessor">&lt;?php</span>
+<span class="org-comment-delimiter">/**</span><span class="org-comment">
+ * Rss class
+ *
+ * Features:
+ * - Only depends on libxml2 library (no SimpleXML)
+ * - Xml validity is performed by libxml2
+ * - Parse rdf:RDF, rss, atom feeds
+ * - Let you customize what information you want with simple syntax
+ * - Created for rss/atom feed but useful for common xml format
+ * 
+ * How to use:
+ * - http://tontof.net/kriss/php5/rss
+ </span><span class="org-comment-delimiter">*/</span>
+<span class="org-keyword">class</span> <span class="org-type">Rss</span>
+{
+    <span class="org-keyword">const</span> <span class="org-warning">UNKNOWN</span> = <span class="org-default">0</span>;
+    <span class="org-keyword">const</span> <span class="org-warning">RSS</span> = <span class="org-default">1</span>;
+    <span class="org-keyword">const</span> <span class="org-warning">ATOM</span> = <span class="org-default">2</span>;
+
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> $<span class="org-variable-name">feedFormat</span> = <span class="org-default">array(</span>
+       <span class="org-string">'title'</span> =<span class="org-constant">&gt;</span> <span class="org-default">array(</span><span class="org-string">'&gt;title'</span>),
+       <span class="org-string">'description'</span> =&gt; <span class="org-default">array(</span><span class="org-string">'&gt;description'</span>, <span class="org-string">'&gt;subtitle'</span>),
+       <span class="org-string">'htmlUrl'</span> =&gt; <span class="org-default">array(</span><span class="org-string">'&gt;link'</span>, <span class="org-string">'&gt;link[rel=self][href]'</span>, <span class="org-string">'&gt;link[href]'</span>, <span class="org-string">'&gt;id'</span>)
+    );
+
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> $<span class="org-variable-name">itemFormat</span> = <span class="org-default">array(</span>
+        <span class="org-string">'author'</span> =&gt; <span class="org-default">array(</span><span class="org-string">'&gt;author&gt;name'</span>, <span class="org-string">'&gt;author'</span>, <span class="org-string">'&gt;dc:creator'</span>, <span class="org-string">'feed&gt;author&gt;name'</span>, <span class="org-string">'&gt;dc:author'</span>, <span class="org-string">'&gt;creator'</span>),
+        <span class="org-string">'content'</span> =&gt; <span class="org-default">array(</span><span class="org-string">'&gt;content:encoded'</span>, <span class="org-string">'&gt;content'</span>, <span class="org-string">'&gt;description'</span>, <span class="org-string">'&gt;summary'</span>, <span class="org-string">'&gt;subtitle'</span>),
+        <span class="org-string">'description'</span> =&gt; <span class="org-default">array(</span><span class="org-string">'&gt;description'</span>, <span class="org-string">'&gt;summary'</span>, <span class="org-string">'&gt;subtitle'</span>, <span class="org-string">'&gt;content'</span>, <span class="org-string">'&gt;content:encoded'</span>),
+        <span class="org-string">'via'</span> =&gt; <span class="org-default">array(</span><span class="org-string">'&gt;guid'</span>, <span class="org-string">'&gt;id'</span>),
+        <span class="org-string">'link'</span> =&gt; <span class="org-default">array(</span><span class="org-string">'&gt;feedburner:origLink'</span>, <span class="org-string">'&gt;link[rel=alternate][href]'</span>, <span class="org-string">'&gt;link[href]'</span>, <span class="org-string">'&gt;link'</span>, <span class="org-string">'&gt;guid'</span>, <span class="org-string">'&gt;id'</span>),
+        <span class="org-string">'time'</span> =&gt; <span class="org-default">array(</span><span class="org-string">'&gt;pubDate'</span>, <span class="org-string">'&gt;updated'</span>, <span class="org-string">'&gt;lastBuildDate'</span>, <span class="org-string">'&gt;published'</span>, <span class="org-string">'&gt;dc:date'</span>, <span class="org-string">'&gt;date'</span>, <span class="org-string">'&gt;created'</span>, <span class="org-string">'&gt;modified'</span>),
+        <span class="org-string">'title'</span> =&gt; <span class="org-default">array(</span><span class="org-string">'&gt;title'</span>)
+    );
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Check for a list of attributes if current node is valid
+     *
+     * @param DOMNode $node  to check if valid
+     * @param array   $attrs to test if in $node
+     *
+     * @return boolean true if $node is valid for $attrs, false otherwise
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">isValidNodeAttrs</span>($<span class="org-variable-name">node</span>, $<span class="org-variable-name">attrs</span>)
+    {
+        <span class="org-keyword">foreach</span> ($<span class="org-variable-name">attrs</span> <span class="org-keyword">as</span> $<span class="org-variable-name">attr</span>) {
+            <span class="org-keyword">if</span> (<span class="org-default">strpos(</span>$<span class="org-variable-name">attr</span>, <span class="org-string">'='</span>) !== <span class="org-constant">false</span>) {
+                <span class="org-default">list(</span>$<span class="org-variable-name">attr</span>, $<span class="org-variable-name">val</span>) = <span class="org-default">explode(</span><span class="org-string">'='</span>, $<span class="org-variable-name">attr</span>);
+            }
+            <span class="org-keyword">if</span> (!$<span class="org-variable-name">node</span>-&gt;<span class="org-default">hasAttribute</span>($<span class="org-variable-name">attr</span>)
+                || (!<span class="org-default">empty(</span>$<span class="org-variable-name">val</span>) &amp;&amp; $<span class="org-variable-name">node</span>-&gt;<span class="org-default">getAttribute</span>($<span class="org-variable-name">attr</span>) !== $<span class="org-variable-name">val</span>)) {
+                <span class="org-keyword">return</span> <span class="org-constant">false</span>;
+            }
+        }
+
+        <span class="org-keyword">return</span> <span class="org-constant">true</span>;
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Check if tagName from $nodes are correct depending on $name
+     *
+     * @param DOMNodeList $nodes to check
+     * @param string      $name  to compare with tagName
+     *
+     * @return array of nodes with correct $name
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">filterNodeListByName</span>($<span class="org-variable-name">nodes</span>, $<span class="org-variable-name">name</span>)
+    {
+        $<span class="org-variable-name">res</span> = <span class="org-default">array(</span>);
+
+        <span class="org-keyword">for</span> ($<span class="org-variable-name">i</span> = <span class="org-default">0</span>; $<span class="org-variable-name">i</span> &lt; $<span class="org-variable-name">nodes</span>-<span class="org-constant">&gt;</span><span class="org-variable-name">length</span>; $<span class="org-variable-name">i</span>++) {
+            <span class="org-keyword">if</span> ($<span class="org-variable-name">nodes</span>-&gt;<span class="org-default">item</span>($<span class="org-variable-name">i</span>)-&gt;<span class="org-variable-name">tagName</span> === $<span class="org-variable-name">name</span>) {
+                $<span class="org-variable-name">res</span>[] = $<span class="org-variable-name">nodes</span>-&gt;<span class="org-default">item</span>($<span class="org-variable-name">i</span>);
+            }
+        }
+
+        <span class="org-keyword">return</span> $<span class="org-variable-name">res</span>;
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Return array of descendant DOMNode of $node with tagName equals to $name
+     *
+     * @param DOMNode $node to starts with
+     * @param string  $name of descendant
+     *
+     * @return array of descendant DOMNode with tagName equals to $name
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">getNodesName</span>($<span class="org-variable-name">node</span>, $<span class="org-variable-name">name</span>)
+    {
+        <span class="org-keyword">if</span> (<span class="org-default">strpos(</span>$<span class="org-variable-name">name</span>, <span class="org-string">':'</span>) !== <span class="org-constant">false</span>) {
+            <span class="org-default">list(</span>, $<span class="org-variable-name">localname</span>) = <span class="org-default">explode(</span><span class="org-string">':'</span>, $<span class="org-variable-name">name</span>);
+            $<span class="org-variable-name">nodes</span> = $<span class="org-variable-name">node</span>-&gt;<span class="org-default">getElementsByTagNameNS</span>(<span class="org-string">'*'</span>, $<span class="org-variable-name">localname</span>);
+        } <span class="org-keyword">else</span> {
+            $<span class="org-variable-name">nodes</span> = $<span class="org-variable-name">node</span>-&gt;<span class="org-default">getElementsByTagName</span>($<span class="org-variable-name">name</span>);
+        }
+
+        <span class="org-keyword">return</span> <span class="org-constant">self</span>::<span class="org-default">filterNodeListByName(</span>$<span class="org-variable-name">nodes</span>, $<span class="org-variable-name">name</span>);
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Return content of $node depending on defined $selectors
+     *
+     * @param DOMNode $node      to starts with
+     * @param array   $selectors defined using node&gt;node[attr=val][attr]
+     *
+     * @return string of the desired selection or empty string if not found
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">getElement</span>($<span class="org-variable-name">node</span>, $<span class="org-variable-name">selectors</span>)
+    {
+        $<span class="org-variable-name">res</span> = <span class="org-string">''</span>;
+        $<span class="org-variable-name">selector</span> = <span class="org-default">array_shift(</span>$<span class="org-variable-name">selectors</span>);
+        $<span class="org-variable-name">attributes</span> = <span class="org-default">explode(</span><span class="org-string">'['</span>, <span class="org-default">trim(</span>$<span class="org-variable-name">selector</span>, <span class="org-string">']'</span>));
+        $<span class="org-variable-name">name</span> = <span class="org-default">array_shift(</span>$<span class="org-variable-name">attributes</span>);
+        <span class="org-keyword">if</span> (<span class="org-default">substr(</span>$<span class="org-variable-name">name</span>, -<span class="org-default">1</span>) == <span class="org-string">"*"</span>) {
+            $<span class="org-variable-name">name</span> = <span class="org-default">substr(</span>$<span class="org-variable-name">name</span>, <span class="org-default">0</span>, -<span class="org-default">1</span>);
+            $<span class="org-variable-name">res</span> = <span class="org-default">array(</span>);
+        }
+
+        $<span class="org-variable-name">nodes</span> = <span class="org-constant">self</span>::<span class="org-default">getNodesName(</span>$<span class="org-variable-name">node</span>, $<span class="org-variable-name">name</span>);
+        <span class="org-keyword">foreach</span> ($<span class="org-variable-name">nodes</span> <span class="org-keyword">as</span> $<span class="org-variable-name">currentNode</span>) {
+            <span class="org-keyword">if</span> ($<span class="org-variable-name">currentNode</span>-&gt;<span class="org-variable-name">parentNode</span>-&gt;<span class="org-default">isSameNode</span>($<span class="org-variable-name">node</span>)
+                &amp;&amp; <span class="org-constant">self</span>::<span class="org-default">isValidNodeAttrs(</span>$<span class="org-variable-name">currentNode</span>, $<span class="org-variable-name">attributes</span>)) {
+                <span class="org-keyword">if</span> (<span class="org-default">empty(</span>$<span class="org-variable-name">selectors</span>)) {
+                    $<span class="org-variable-name">attr</span> = <span class="org-default">end(</span>$<span class="org-variable-name">attributes</span>);
+                    <span class="org-keyword">if</span> (<span class="org-default">empty(</span>$<span class="org-variable-name">attr</span>) || <span class="org-default">strpos(</span>$<span class="org-variable-name">attr</span>, <span class="org-string">'='</span>) !== <span class="org-constant">false</span>) {
+                        <span class="org-keyword">if</span> (<span class="org-default">is_array(</span>$<span class="org-variable-name">res</span>)) {
+                            $<span class="org-variable-name">res</span>[] = $<span class="org-variable-name">currentNode</span>-&gt;<span class="org-variable-name">textContent</span>;
+                        } <span class="org-keyword">else</span> {
+                            $<span class="org-variable-name">res</span> = $<span class="org-variable-name">currentNode</span>-&gt;<span class="org-variable-name">textContent</span>;
+                        }
+                    } <span class="org-keyword">else</span> {
+                        <span class="org-keyword">if</span> (<span class="org-default">is_array(</span>$<span class="org-variable-name">res</span>)) {
+                            $<span class="org-variable-name">res</span>[] = $<span class="org-variable-name">currentNode</span>-&gt;<span class="org-default">getAttribute</span>($<span class="org-variable-name">attr</span>);
+                        } <span class="org-keyword">else</span> {
+                            $<span class="org-variable-name">res</span> = $<span class="org-variable-name">currentNode</span>-&gt;<span class="org-default">getAttribute</span>($<span class="org-variable-name">attr</span>);
+                        }
+                    }
+                } <span class="org-keyword">else</span> {
+                    <span class="org-keyword">return</span> <span class="org-constant">self</span>::<span class="org-default">getElement(</span>$<span class="org-variable-name">currentNode</span>, $<span class="org-variable-name">selectors</span>);
+                }
+            }
+            <span class="org-keyword">if</span> (!<span class="org-default">is_array(</span>$<span class="org-variable-name">res</span>) &amp;&amp; !<span class="org-default">empty(</span>$<span class="org-variable-name">res</span>)) {
+                <span class="org-keyword">break</span>;
+            }
+        }
+
+        <span class="org-keyword">return</span> $<span class="org-variable-name">res</span>;
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Format $element depending on $formats
+     *
+     * @param DOMDocument $dom     of document
+     * @param DOMNode     $element to starts with
+     * @param array       $formats to use to extract information
+     *
+     * @return array of extracted information
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">formatElement</span>($<span class="org-variable-name">dom</span>, $<span class="org-variable-name">element</span>, $<span class="org-variable-name">formats</span>)
+    {
+        $<span class="org-variable-name">newElement</span> = <span class="org-default">array(</span>);
+        <span class="org-keyword">foreach</span> ($<span class="org-variable-name">formats</span> <span class="org-keyword">as</span> $<span class="org-variable-name">format</span> =&gt; $<span class="org-variable-name">list</span>) {
+            $<span class="org-variable-name">newElement</span>[$<span class="org-variable-name">format</span>] = <span class="org-string">''</span>;
+            <span class="org-keyword">for</span> ($<span class="org-variable-name">i</span> = <span class="org-default">0</span>, $<span class="org-variable-name">len</span> = <span class="org-default">count(</span>$<span class="org-variable-name">list</span>);
+                 $<span class="org-variable-name">i</span> &lt; $<span class="org-variable-name">len</span> &amp;&amp; <span class="org-default">empty(</span>$<span class="org-variable-name">newElement</span>[$<span class="org-variable-name">format</span>]);
+                 $<span class="org-variable-name">i</span>++) {
+                $<span class="org-variable-name">selectors</span> = <span class="org-default">explode(</span><span class="org-string">'&gt;'</span>, $<span class="org-variable-name">list</span>[$<span class="org-variable-name">i</span>]);
+                $<span class="org-variable-name">selector</span> = <span class="org-default">array_shift(</span>$<span class="org-variable-name">selectors</span>);
+                <span class="org-keyword">if</span> (<span class="org-default">empty(</span>$<span class="org-variable-name">selector</span>)) {
+                    $<span class="org-variable-name">newElement</span>[$<span class="org-variable-name">format</span>] = <span class="org-constant">self</span>::<span class="org-default">getElement(</span>$<span class="org-variable-name">element</span>, $<span class="org-variable-name">selectors</span>);
+                } <span class="org-keyword">else</span> <span class="org-keyword">if</span> (<span class="org-default">strpos(</span>$<span class="org-variable-name">selector</span>, <span class="org-string">'['</span>) === <span class="org-default">0</span>) {
+                    $<span class="org-variable-name">attributes</span> = <span class="org-default">explode(</span><span class="org-string">'['</span>, <span class="org-default">trim(</span>$<span class="org-variable-name">selector</span>, <span class="org-string">']'</span>));
+                    <span class="org-keyword">if</span> (<span class="org-constant">self</span>::<span class="org-default">isValidNodeAttrs(</span>$<span class="org-variable-name">element</span>, $<span class="org-variable-name">attributes</span>)) {
+                        $<span class="org-variable-name">newElement</span>[$<span class="org-variable-name">format</span>] = <span class="org-constant">self</span>::<span class="org-default">getElement(</span>$<span class="org-variable-name">element</span>, $<span class="org-variable-name">selectors</span>);
+                    }
+                } <span class="org-keyword">else</span> {
+                    $<span class="org-variable-name">attributes</span> = <span class="org-default">explode(</span><span class="org-string">'['</span>, <span class="org-default">trim(</span>$<span class="org-variable-name">selector</span>, <span class="org-string">']'</span>));
+                    $<span class="org-variable-name">name</span> = <span class="org-default">array_shift(</span>$<span class="org-variable-name">attributes</span>);
+                    $<span class="org-variable-name">nodes</span> = <span class="org-constant">self</span>::<span class="org-default">getNodesName(</span>$<span class="org-variable-name">dom</span>, $<span class="org-variable-name">name</span>);
+                    <span class="org-keyword">foreach</span> ($<span class="org-variable-name">nodes</span> <span class="org-keyword">as</span> $<span class="org-variable-name">node</span>) {
+                        <span class="org-keyword">if</span> (<span class="org-constant">self</span>::<span class="org-default">isValidNodeAttrs(</span>$<span class="org-variable-name">node</span>, $<span class="org-variable-name">attributes</span>)) {
+                            $<span class="org-variable-name">newElement</span>[$<span class="org-variable-name">format</span>] = <span class="org-constant">self</span>::<span class="org-default">getElement(</span>$<span class="org-variable-name">node</span>, $<span class="org-variable-name">selectors</span>);
+                        }
+                        <span class="org-keyword">if</span> (!<span class="org-default">empty(</span>$<span class="org-variable-name">newElement</span>[$<span class="org-variable-name">format</span>])) {
+                            <span class="org-keyword">break</span>;
+                        }
+                    }
+                }
+            }
+        }
+
+        <span class="org-keyword">return</span> $<span class="org-variable-name">newElement</span>;
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Return array of feed from a DOMDocument
+     *
+     * @param DOMDocument $dom
+     *
+     * @return array of feed info extracted from $dom
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">getFeed</span>($<span class="org-variable-name">dom</span>)
+    {
+        $<span class="org-variable-name">feed</span> = <span class="org-keyword">new</span> <span class="org-type">DOMNodelist</span>;
+
+        $<span class="org-variable-name">type</span> = <span class="org-constant">self</span>::<span class="org-default">getType(</span>$<span class="org-variable-name">dom</span>);
+        <span class="org-keyword">if</span> ($<span class="org-variable-name">type</span> === <span class="org-constant">self</span>::<span class="org-default">RSS)</span> {
+            $<span class="org-variable-name">feed</span> = $<span class="org-variable-name">dom</span>-&gt;<span class="org-default">getElementsByTagName</span>(<span class="org-string">'channel'</span>)-&gt;<span class="org-default">item</span>(<span class="org-default">0</span>);
+        } <span class="org-keyword">elseif</span> ($<span class="org-variable-name">type</span> === <span class="org-constant">self</span>::<span class="org-default">ATOM)</span> {
+            $<span class="org-variable-name">feed</span> = $<span class="org-variable-name">dom</span>-&gt;<span class="org-default">getElementsByTagName</span>(<span class="org-string">'feed'</span>)-&gt;<span class="org-default">item</span>(<span class="org-default">0</span>);
+        }
+
+        <span class="org-keyword">return</span> <span class="org-constant">self</span>::<span class="org-default">formatElement(</span>$<span class="org-variable-name">dom</span>, $<span class="org-variable-name">feed</span>, <span class="org-constant">self</span>::$<span class="org-variable-name">feedFormat</span>);
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Return array of items from a DOMDocument
+     *
+     * @param DOMDocument $dom
+     * @param integer     $nb of items to select
+     *
+     * @return array of items extracted from the $dom
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">getItems</span>($<span class="org-variable-name">dom</span>, $<span class="org-variable-name">nb</span> = -<span class="org-default">1</span>)
+    {
+        $<span class="org-variable-name">items</span> = <span class="org-keyword">new</span> <span class="org-type">DOMNodelist</span>;
+
+        $<span class="org-variable-name">type</span> = <span class="org-constant">self</span>::<span class="org-default">getType(</span>$<span class="org-variable-name">dom</span>);
+        <span class="org-keyword">if</span> ($<span class="org-variable-name">type</span> === <span class="org-constant">self</span>::<span class="org-default">RSS)</span> {
+            $<span class="org-variable-name">items</span> = $<span class="org-variable-name">dom</span>-&gt;<span class="org-default">getElementsByTagName</span>(<span class="org-string">'item'</span>);
+        } <span class="org-keyword">elseif</span> ($<span class="org-variable-name">type</span> === <span class="org-constant">self</span>::<span class="org-default">ATOM)</span> {
+            $<span class="org-variable-name">items</span> = $<span class="org-variable-name">dom</span>-&gt;<span class="org-default">getElementsByTagName</span>(<span class="org-string">'entry'</span>);
+        }
+
+        $<span class="org-variable-name">newItems</span> = <span class="org-default">array(</span>);
+        $<span class="org-variable-name">max</span> = $<span class="org-variable-name">nb</span> === -<span class="org-default">1</span> ? $<span class="org-variable-name">items</span>-&gt;<span class="org-variable-name">length</span> : <span class="org-default">max(</span>$<span class="org-variable-name">nb</span>, $<span class="org-variable-name">item</span>-&gt;<span class="org-variable-name">length</span>);
+        <span class="org-keyword">for</span> ($<span class="org-variable-name">i</span> = <span class="org-default">0</span>; $<span class="org-variable-name">i</span> &lt; $<span class="org-variable-name">max</span>; $<span class="org-variable-name">i</span>++) {
+            $<span class="org-variable-name">newItems</span>[] = <span class="org-constant">self</span>::<span class="org-default">formatElement(</span>$<span class="org-variable-name">dom</span>, $<span class="org-variable-name">items</span>-<span class="org-constant">&gt;</span><span class="org-default">item</span>($<span class="org-variable-name">i</span>), <span class="org-constant">self</span>::$<span class="org-variable-name">itemFormat</span>);
+        }
+
+        <span class="org-keyword">return</span> $<span class="org-variable-name">newItems</span>;
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Return type of a DOMDocument
+     *
+     * @param DOMDocument $dom
+     *
+     * @return const corresponding to the type of $dom
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">getType</span>($<span class="org-variable-name">dom</span>)
+    {
+        $<span class="org-variable-name">type</span> = <span class="org-constant">self</span>::<span class="org-default">UNKNOWN;</span>
+
+        $<span class="org-variable-name">feed</span> = $<span class="org-variable-name">dom</span>-&gt;<span class="org-default">getElementsByTagName</span>(<span class="org-string">'channel'</span>);
+        <span class="org-keyword">if</span> ($<span class="org-variable-name">feed</span>-&gt;<span class="org-default">item</span>(<span class="org-default">0</span>)) {
+            $<span class="org-variable-name">type</span> = <span class="org-constant">self</span>::<span class="org-default">RSS;</span>
+        } <span class="org-keyword">else</span> {
+            $<span class="org-variable-name">feed</span> = $<span class="org-variable-name">dom</span>-&gt;<span class="org-default">getElementsByTagName</span>(<span class="org-string">'feed'</span>);
+            <span class="org-keyword">if</span> ($<span class="org-variable-name">feed</span>-&gt;<span class="org-default">item</span>(<span class="org-default">0</span>)) {
+                $<span class="org-variable-name">type</span> = <span class="org-constant">self</span>::<span class="org-default">ATOM;</span>
+            }
+        }
+
+        <span class="org-keyword">return</span> $<span class="org-variable-name">type</span>;
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Load a XML string into DOMDocument
+     *
+     * @param string $data
+     *
+     * @return array with a DOMDocument and a string error
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">loadDom</span>($<span class="org-variable-name">data</span>)
+    {
+        <span class="org-default">libxml_clear_errors(</span>);
+        <span class="org-default">set_error_handler(array(</span><span class="org-string">'Rss'</span>, <span class="org-string">'silenceErrors'</span>));
+        $<span class="org-variable-name">dom</span> = <span class="org-keyword">new</span> <span class="org-type">DOMDocument</span>();
+        $<span class="org-variable-name">dom</span>-&gt;<span class="org-default">loadXML</span>($<span class="org-variable-name">data</span>);
+        <span class="org-default">restore_error_handler(</span>);
+
+        <span class="org-keyword">return</span> <span class="org-default">array(</span>
+            <span class="org-string">'dom'</span> =&gt; $<span class="org-variable-name">dom</span>,
+            <span class="org-string">'error'</span> =&gt; <span class="org-constant">self</span>::<span class="org-default">getError(libxml_get_last_error(</span>))
+        );
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Explicit libxml2 error
+     *
+     * @param LibXMLError $error
+     *
+     * @return string of the error
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">getError</span>($<span class="org-variable-name">error</span>)
+    {
+        $<span class="org-variable-name">return</span> = <span class="org-string">''</span>;
+
+        <span class="org-keyword">if</span> ($<span class="org-variable-name">error</span> !== <span class="org-constant">false</span>) {
+            <span class="org-keyword">switch</span> ($<span class="org-variable-name">error</span>-&gt;<span class="org-variable-name">level</span>) {
+            <span class="org-keyword">case</span> <span class="org-constant">LIBXML_ERR_WARNING</span>:
+                $<span class="org-variable-name">return</span> = <span class="org-string">"Warning XML $error-&gt;</span><span class="org-variable-name">code</span><span class="org-string">: "</span>;
+                <span class="org-keyword">break</span>;
+            <span class="org-keyword">case</span> <span class="org-constant">LIBXML_ERR_ERROR</span>:
+                $<span class="org-variable-name">return</span> = <span class="org-string">"Error XML $error-&gt;</span><span class="org-variable-name">code</span><span class="org-string">: "</span>;
+                <span class="org-keyword">break</span>;
+            <span class="org-keyword">case</span> <span class="org-constant">LIBXML_ERR_FATAL</span>:
+                $<span class="org-variable-name">return</span> = <span class="org-string">"Fatal Error XML $error-&gt;</span><span class="org-variable-name">code</span><span class="org-string">: "</span>;
+                <span class="org-keyword">break</span>;
+            }
+            $<span class="org-variable-name">return</span> .= $<span class="org-variable-name">return</span><span class="org-warning">.</span><span class="org-default">trim(</span>$<span class="org-variable-name">error</span>-&gt;<span class="org-variable-name">message</span>);
+        }
+
+        <span class="org-keyword">return</span> $<span class="org-variable-name">return</span>;
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * From Simplie Pie
+     *
+     * @param integer $num of errno
+     * @param string  $str of errstr
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">silenceErrors</span>($<span class="org-variable-name">num</span>, $<span class="org-variable-name">str</span>)
+    {
+        <span class="org-comment-delimiter">// </span><span class="org-comment">No-op                                                       
+</span>    }
+}
+</pre>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-options" class="outline-2">
+<h2 id="options"><a name="sec-3" id="sec-3"></a><span class="section-number-2">3</span> Advanced options </h2>
+<div class="outline-text-2" id="text-options">
+
+<p>By default, Rss class lets you parse most of rss/atom feeds. However
+you may want to use custom information by modifying <b>$feedFormat</b> and
+<b>$itemFormat</b>. The order of rules also defines the priority. The first
+non-empty element corresponding is selected and the other rules are
+not checked.
+</p>
+</div>
+
+<div id="outline-container-3.1" class="outline-3">
+<h3 id="sec-3.1"><span class="section-number-3">3.1</span> Child selection <b>&gt;</b> </h3>
+<div class="outline-text-3" id="text-3.1">
+
+<p>Using <b>&gt;</b> lets you capture different elements.  If the rule begins
+with an empty selector, that means it will search inside <b>feed</b> or
+<b>item</b> element.
+</p>
+<p>
+With author format, the rule <b>&gt;author&gt;name</b> try to capture the <b>name</b>
+element defined inside the <b>author</b> element defined inside <b>item</b>
+element. while the rule <b>feed&gt;author&gt;name</b> try to capture the <b>name</b>
+element defined inside the <b>author</b> element defined inside <b>feed</b>
+element defined somewhere in the dom.
+</p></div>
+
+</div>
+
+<div id="outline-container-3.2" class="outline-3">
+<h3 id="sec-3.2"><span class="section-number-3">3.2</span> Attribute selection <b>[attribute]</b> </h3>
+<div class="outline-text-3" id="text-3.2">
+
+<p>By default, the content of tag is selected. You may want to select an
+attribute of element using <b>[attribute]</b> selection.
+</p>
+<p>
+With htmlUrl format, the rule <b>&gt;link[href]</b> select the value of
+attribute <b>href</b> inside a <b>link</b> element defined inside <b>feed</b> element.
+</p></div>
+
+</div>
+
+<div id="outline-container-3.3" class="outline-3">
+<h3 id="sec-3.3"><span class="section-number-3">3.3</span> Conditionnal selection <b>[attribute=value]</b> </h3>
+<div class="outline-text-3" id="text-3.3">
+
+<p>When parsing elements, you may want to test some attributes.
+</p>
+<p>
+With htmlUrl format, the rule <b>&gt;link[rel=self][href]</b> try to capture
+the <b>href</b> attribute inside the <b>link</b> element that contains attribute
+<b>rel</b> with <b>self</b> value.
+</p></div>
+
+</div>
+
+<div id="outline-container-3.4" class="outline-3">
+<h3 id="sec-3.4"><span class="section-number-3">3.4</span> Star selection and customization </h3>
+<div class="outline-text-3" id="text-3.4">
+
+<p>Using Rss class, you may add different rules and select several
+elements inside feed.
+</p>
+<p>
+For example, you may want to get enclosure :
+<a href="http://foz.home.xs4all.nl/mod_enclosure.html">http://foz.home.xs4all.nl/mod_enclosure.html</a>
+</p>
+<p>
+Let use this example :
+<a href="http://www.rssboard.org/files/example-multiple-enclosures.xml">http://www.rssboard.org/files/example-multiple-enclosures.xml</a>
+</p>
+<p>
+If you try on <a href="./demo.php">demo</a> page, the author is missing.
+</p>
+<p>
+As you can see in <a href="http://www.rssboard.org/files/example-multiple-enclosures.xml">xml</a> author is defined with <b>itunes:author</b> tag
+defined in channel element.
+</p>
+<p>
+In order to add this rule to Rss class, you just need to add a rule to
+item author:
+</p>
+
+
+<pre class="src src-php"><span class="org-type">Rss</span>::$<span class="org-variable-name">itemFormat</span>[<span class="org-string">'author'</span>][] = <span class="org-string">'channel&gt;itunes:author'</span>;
+</pre>
+
+
+
+
+<p>
+In order to get the first enclosure:
+</p>
+
+
+<pre class="src src-php"><span class="org-type">Rss</span>::$<span class="org-variable-name">itemFormat</span>[<span class="org-string">'enclosure'</span>] = <span class="org-default">array(</span><span class="org-string">'&gt;enclosure[url]'</span>);
+</pre>
+
+
+
+
+<p>
+But you may want all enclosures by adding a star:
+</p>
+
+
+<pre class="src src-php"><span class="org-type">Rss</span>::$<span class="org-variable-name">itemFormat</span>[<span class="org-string">'enclosure'</span>] = <span class="org-default">array(</span><span class="org-string">'&gt;enclosure*[url]'</span>);
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-advanced-demo" class="outline-3">
+<h3 id="advanced-demo"><a name="sec-3.5" id="sec-3.5"></a><span class="section-number-3">3.5</span> Advanced demo </h3>
+<div class="outline-text-3" id="text-advanced-demo">
+
+<p>You can try the <a href="./demo-advanced.php">advanced demo</a>:
+</p>
+
+
+<pre class="src src-php"><span class="org-preprocessor">&lt;?php</span> 
+    <span class="org-keyword">include</span> <span class="org-string">'Rss.php'</span>;
+
+    <span class="org-type">Rss</span>::$<span class="org-variable-name">itemFormat</span>[<span class="org-string">'author'</span>][] = <span class="org-string">'channel&gt;itunes:author'</span>;
+    <span class="org-type">Rss</span>::$<span class="org-variable-name">itemFormat</span>[<span class="org-string">'enclosure'</span>] = <span class="org-default">array(</span><span class="org-string">'&gt;enclosure*[url]'</span>);
+
+    $<span class="org-variable-name">data</span> = <span class="org-default">file_get_contents(</span>
+        <span class="org-string">'http://www.rssboard.org/files/example-multiple-enclosures.xml'</span>
+    );
+    $<span class="org-variable-name">rss</span> = <span class="org-type">Rss</span>::<span class="org-default">loadDom(</span>$<span class="org-variable-name">data</span>);
+    <span class="org-keyword">if</span> (<span class="org-default">empty(</span>$<span class="org-variable-name">rss</span>[<span class="org-string">'error'</span>])) {
+        $<span class="org-variable-name">dom</span> = $<span class="org-variable-name">rss</span>[<span class="org-string">'dom'</span>];
+    } <span class="org-keyword">else</span> {
+        $<span class="org-variable-name">error</span> = $<span class="org-variable-name">rss</span>[<span class="org-string">'error'</span>];
+    }
+
+<span class="org-preprocessor">?&gt;</span>
+<span class="org-constant">&lt;!DOCTYPE</span> <span class="org-warning">html</span><span class="org-constant">&gt;</span>
+<span class="org-constant">&lt;html&gt;</span>
+  <span class="org-constant">&lt;head&gt;</span>
+    <span class="org-constant">&lt;title&gt;</span><span class="org-warning">Rss</span><span class="org-constant">&lt;/title&gt;</span>
+    <span class="org-constant">&lt;meta</span> <span class="org-constant">charset=</span><span class="org-string">"utf-8"</span><span class="org-constant">&gt;</span>
+  <span class="org-constant">&lt;/head&gt;</span>
+  <span class="org-constant">&lt;body&gt;</span>
+<span class="org-preprocessor">&lt;?php</span>
+<span class="org-keyword">if</span> (!<span class="org-default">empty(</span>$<span class="org-variable-name">error</span>)) {
+    <span class="org-default">die(</span>$<span class="org-variable-name">error</span>);
+}
+<span class="org-keyword">if</span> (<span class="org-default">isset(</span>$<span class="org-variable-name">dom</span>)) {
+    $<span class="org-variable-name">feed</span> = <span class="org-type">Rss</span>::<span class="org-default">getFeed(</span>$<span class="org-variable-name">dom</span>);
+    $<span class="org-variable-name">items</span> = <span class="org-type">Rss</span>::<span class="org-default">getItems(</span>$<span class="org-variable-name">dom</span>);
+<span class="org-preprocessor">?&gt;</span>
+<span class="org-constant">&lt;a</span>
+  <span class="org-warning">href</span>=<span class="org-string">"&lt;?php echo htmlspecialchars($feed['htmlUrl']); ?&gt;"</span>
+  <span class="org-warning">title</span>=<span class="org-string">"&lt;?php echo htmlspecialchars($feed['description']); ?&gt;"</span>
+&gt;
+<span class="org-preprocessor">&lt;?php</span> <span class="org-keyword">echo</span> <span class="org-default">htmlspecialchars(</span>$<span class="org-variable-name">feed</span>[<span class="org-string">'title'</span>]); <span class="org-preprocessor">?&gt;</span>
+<span class="org-constant">&lt;/a&gt;</span> :
+<span class="org-constant">&lt;ol&gt;</span>
+<span class="org-preprocessor">&lt;?php</span> <span class="org-keyword">foreach</span>($<span class="org-variable-name">items</span> <span class="org-keyword">as</span> $<span class="org-variable-name">item</span>) { <span class="org-preprocessor">?&gt;</span>
+    <span class="org-constant">&lt;li&gt;</span>
+      <span class="org-constant">&lt;a</span> <span class="org-constant">href=</span><span class="org-string">"&lt;?php echo htmlspecialchars($item['link']); ?&gt;"</span>&gt;<span class="org-preprocessor">&lt;?php</span> <span class="org-keyword">echo</span> <span class="org-default">htmlspecialchars(</span>$<span class="org-variable-name">item</span>[<span class="org-string">'title'</span>]); <span class="org-preprocessor">?&gt;</span><span class="org-constant">&lt;/a&gt;&lt;br&gt;</span>
+      <span class="org-constant">&lt;em&gt;</span><span class="org-preprocessor">&lt;?php</span> <span class="org-keyword">echo</span> <span class="org-default">utf8_encode(strftime(</span><span class="org-string">'%A %d %B %Y - %H:%M'</span>, <span class="org-default">strtotime(</span>$<span class="org-variable-name">item</span>[<span class="org-string">'time'</span>]))); <span class="org-preprocessor">?&gt;</span><span class="org-constant">&lt;/em&gt;</span>
+      <span class="org-warning">by</span> <span class="org-constant">&lt;strong&gt;</span><span class="org-preprocessor">&lt;?php</span> <span class="org-keyword">echo</span> <span class="org-default">htmlspecialchars(</span>$<span class="org-variable-name">item</span>[<span class="org-string">'author'</span>]); <span class="org-preprocessor">?&gt;</span><span class="org-constant">&lt;/strong&gt;&lt;br&gt;</span>
+      <span class="org-preprocessor">&lt;?php</span> <span class="org-keyword">echo</span> <span class="org-default">substr(htmlspecialchars(strip_tags(</span>$<span class="org-variable-name">item</span>[<span class="org-string">'content'</span>])), <span class="org-default">0</span>, <span class="org-default">100</span>).<span class="org-string">'...'</span>; <span class="org-preprocessor">?&gt;</span><span class="org-constant">&lt;br&gt;</span>
+      <span class="org-warning">enclosures</span>:<span class="org-constant">&lt;br&gt;</span>
+      <span class="org-preprocessor">&lt;?php</span> <span class="org-keyword">foreach</span>($<span class="org-variable-name">item</span>[<span class="org-string">'enclosure'</span>] <span class="org-keyword">as</span> $<span class="org-variable-name">enclosure</span>) { <span class="org-preprocessor">?&gt;</span>
+      <span class="org-constant">&lt;a</span> <span class="org-constant">href=</span><span class="org-string">"&lt;?php echo htmlspecialchars($enclosure); ?&gt;"</span>&gt;
+        <span class="org-preprocessor">&lt;?php</span> <span class="org-keyword">echo</span> <span class="org-default">htmlspecialchars(</span>$<span class="org-variable-name">enclosure</span>); <span class="org-preprocessor">?&gt;</span>
+      <span class="org-constant">&lt;/a&gt;&lt;br&gt;</span>
+      <span class="org-preprocessor">&lt;?php</span> } <span class="org-preprocessor">?&gt;</span>
+    <span class="org-constant">&lt;/li&gt;</span>
+<span class="org-preprocessor">&lt;?php</span> } <span class="org-preprocessor">?&gt;</span>
+<span class="org-constant">&lt;/ol&gt;</span>
+<span class="org-preprocessor">&lt;?php</span>
+}
+<span class="org-preprocessor">?&gt;</span>
+  <span class="org-constant">&lt;/body&gt;</span>
+<span class="org-constant">&lt;/html&gt;</span>
+</pre>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-alternatives" class="outline-2">
+<h2 id="alternatives"><a name="sec-4" id="sec-4"></a><span class="section-number-2">4</span> See alternatives </h2>
+<div class="outline-text-2" id="text-alternatives">
+
+<ul>
+<li>
+<a href="http://www.milletmaxime.net/syndexport/">http://www.milletmaxime.net/syndexport/</a>
+</li>
+<li>
+<a href="https://github.com/fguillot/picoFeed">https://github.com/fguillot/picoFeed</a>
+</li>
+<li>
+<a href="http://lastrss.oslab.net/">http://lastrss.oslab.net/</a>
+</li>
+<li>
+<a href="http://simplepie.org/">http://simplepie.org/</a>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-info" class="outline-2">
+<h2 id="info"><a name="sec-5" id="sec-5"></a><span class="section-number-2">5</span> More infos about RSS/Atom </h2>
+<div class="outline-text-2" id="text-info">
+
+
+</div>
+
+<div id="outline-container-5.1" class="outline-4">
+<h4 id="sec-5.1"><span class="section-number-4">5.1</span> RSS 0.90 </h4>
+<div class="outline-text-4" id="text-5.1">
+
+<ul>
+<li id="sec-5.1.1">spec <br/>
+<ul>
+<li id="sec-5.1.1.1"><a href="http://www.rssboard.org/rss-0-9-0">http://www.rssboard.org/rss-0-9-0</a> <br/>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-5.2" class="outline-4">
+<h4 id="sec-5.2"><span class="section-number-4">5.2</span> RSS 0.91 </h4>
+<div class="outline-text-4" id="text-5.2">
+
+<ul>
+<li id="sec-5.2.1">spec <br/>
+<ul>
+<li id="sec-5.2.1.1"><a href="http://www.rssboard.org/rss-0-9-1">http://www.rssboard.org/rss-0-9-1</a> <br/>
+</li>
+<li id="sec-5.2.1.2"><a href="http://www.rssboard.org/rss-0-9-1-netscape">http://www.rssboard.org/rss-0-9-1-netscape</a> <br/>
+</li>
+</ul>
+</li>
+<li id="sec-5.2.2">examples <br/>
+<ul>
+<li id="sec-5.2.2.1"><a href="http://cyber.law.harvard.edu/rss/examples/sampleRss091.xml">http://cyber.law.harvard.edu/rss/examples/sampleRss091.xml</a> <br/>
+</li>
+<li id="sec-5.2.2.2"><a href="http://static.userland.com/gems/backend/sampleRss.xml">http://static.userland.com/gems/backend/sampleRss.xml</a> <br/>
+</li>
+<li id="sec-5.2.2.3"><a href="http://www.rssboard.org/files/sample-rss-091.xml">http://www.rssboard.org/files/sample-rss-091.xml</a> <br/>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-5.3" class="outline-4">
+<h4 id="sec-5.3"><span class="section-number-4">5.3</span> RSS 0.92 </h4>
+<div class="outline-text-4" id="text-5.3">
+
+<ul>
+<li id="sec-5.3.1">spec <br/>
+<ul>
+<li id="sec-5.3.1.1"><a href="http://www.rssboard.org/rss-0-9-2">http://www.rssboard.org/rss-0-9-2</a> <br/>
+</li>
+</ul>
+</li>
+<li id="sec-5.3.2">examples <br/>
+<ul>
+<li id="sec-5.3.2.1"><a href="http://cyber.law.harvard.edu/rss/examples/sampleRss092.xml">http://cyber.law.harvard.edu/rss/examples/sampleRss092.xml</a> <br/>
+</li>
+<li id="sec-5.3.2.2"><a href="http://www.rssboard.org/files/sample-rss-092.xml">http://www.rssboard.org/files/sample-rss-092.xml</a> <br/>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-5.4" class="outline-4">
+<h4 id="sec-5.4"><span class="section-number-4">5.4</span> RSS 1.0 </h4>
+<div class="outline-text-4" id="text-5.4">
+
+<ul>
+<li id="sec-5.4.1">spec <br/>
+<ul>
+<li id="sec-5.4.1.1"><a href="http://web.resource.org/rss/1.0/spec">http://web.resource.org/rss/1.0/spec</a> <br/>
+</li>
+</ul>
+</li>
+<li id="sec-5.4.2">examples <br/>
+<ul>
+<li id="sec-5.4.2.1"><a href="http://web.resource.org/rss/1.0/spec#s7">http://web.resource.org/rss/1.0/spec#s7</a> <br/>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-5.5" class="outline-4">
+<h4 id="sec-5.5"><span class="section-number-4">5.5</span> RSS 2.0 </h4>
+<div class="outline-text-4" id="text-5.5">
+
+<ul>
+<li id="sec-5.5.1">spec <br/>
+<ul>
+<li id="sec-5.5.1.1"><a href="http://cyber.law.harvard.edu/rss/rss.html">http://cyber.law.harvard.edu/rss/rss.html</a> <br/>
+</li>
+<li id="sec-5.5.1.2"><a href="http://www.rssboard.org/rss-specification">http://www.rssboard.org/rss-specification</a> <br/>
+</li>
+</ul>
+</li>
+<li id="sec-5.5.2">examples <br/>
+<ul>
+<li id="sec-5.5.2.1"><a href="http://cyber.law.harvard.edu/rss/examples/rss2sample.xml">http://cyber.law.harvard.edu/rss/examples/rss2sample.xml</a> <br/>
+</li>
+<li id="sec-5.5.2.2"><a href="http://www.rssboard.org/files/sample-rss-2.xml">http://www.rssboard.org/files/sample-rss-2.xml</a> <br/>
+</li>
+<li id="sec-5.5.2.3"><a href="http://www.rssboard.org/files/rss-2.0-sample.xml">http://www.rssboard.org/files/rss-2.0-sample.xml</a> <br/>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-5.6" class="outline-4">
+<h4 id="sec-5.6"><span class="section-number-4">5.6</span> ATOM </h4>
+<div class="outline-text-4" id="text-5.6">
+
+<ul>
+<li id="sec-5.6.1">spec <br/>
+<ul>
+<li id="sec-5.6.1.1"><a href="http://tools.ietf.org/html/4287">http://tools.ietf.org/html/4287</a> <br/>
+
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble">
+<p class="date"> Date: 2013-08-31 12:04:20 CEST</p>
+</div>
+</div>
+</body>
+</html>

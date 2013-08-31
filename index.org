@@ -1,4 +1,4 @@
-#+OPTIONS:    toc:nil
+#+OPTIONS:    toc:nil author:nil creator:nil
 #+STARTUP:    align
 #+TITLE:      KrISS : simple and smart (or stupid) apps
 #+AUTHOR:     Tontof
@@ -7,16 +7,19 @@
 #+LINK_UP:    .
 #+LINK_HOME:  .
 #+EXPORT_EXCLUDE_TAGS: noexport
+#+STYLE: <link rel="stylesheet" type="text/css" href="inc/style.css" />
 
-* Here are juste my simple and smart (or stupid) php apps:
+* Here are just my simple and smart (or stupid) php apps:
+  - [[./feed][KrISS feed]]: A simple and smart (or stupid) feed reader
+  - [[./php5][KrISS php5]]: A simple and smart (or stupid) PHP5 snippets repository
 ** [[./blog][KrISS blog]]: A simple and smart (or stupid) blogging tool        :noexport:
-** [[./feed][KrISS feed]]: A simple and smart (or stupid) feed reader
+** [[./send][KrISS send]]: A simple and smart (or stupid) social sending tool  :noexport:
 ** KrISS file: A simple and smart (or stupid) file manager         :noexport:
 ** KrISS link: A simple and smart (or stupid) shaarli              :noexport:
 ** KrISS pass: A simple and smart (or stupid) password manager     :noexport:
 ** KrISS pipl: A simple and smart (or stupid) contact manager      :noexport:
 ** KrISS prox: A simple and smart (or stupid) proxy                :noexport:
-* Here are juste my simple and smart (or stupid) bookmarklets:     :noexport:
-** KrISS vidz: A simple and smart (or stupid) videos downloader    :noexport:
+* Here are just my simple and smart (or stupid) bookmarklets:      :noexport:
 ** KrISS html: A simple and smart (or stupid) html page manager    :noexport:
+** KrISS vidz: A simple and smart (or stupid) videos downloader    :noexport:
   

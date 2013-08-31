@@ -1,0 +1,152 @@
+#+OPTIONS:    toc:2 author:nil creator:nil
+#+STARTUP:    align
+#+TITLE:      KrISS php5
+#+AUTHOR:     Tontof
+#+LANGUAGE:   en
+#+STYLE:      <style type="text/css"></style>
+#+LINK_UP:    ..
+#+LINK_HOME:  ../..
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+STYLE: <link rel="stylesheet" type="text/css" href="../../inc/style.css" />
+
+This rss class is developped for [[../../feed][KrISS feed]] but is useful for parsing
+rss/atom feed or xml file.
+* Features
+ :PROPERTIES:
+ :CUSTOM_ID: features
+ :END:
+ - Only depends on libxml2 library (no SimpleXML or other)
+ - Xml validity is performed by libxml2
+ - Parse rdf:RDF, rss, atom feeds
+ - Let you customize what information you want with simple syntax
+ - Created for rss/atom feed but useful for common xml format
+* How to use
+ :PROPERTIES:
+ :CUSTOM_ID: how
+ :END:
+** demo.php
+ :PROPERTIES:
+ :CUSTOM_ID: demo
+ :END:
+This [[./demo.php][demo]] page lets you get RSS/Atom items.
+#+INCLUDE: "./demo.php" src php
+
+** Rss.php
+The Rss class is available on github : https://raw.github.com/tontof/kriss_php5/master/Rss.php
+
+#+INCLUDE: "./Rss.php" src php
+
+* Advanced options
+  :PROPERTIES:
+  :CUSTOM_ID: options
+  :END:
+By default, Rss class lets you parse most of rss/atom feeds. However
+you may want to use custom information by modifying *$feedFormat* and
+*$itemFormat*. The order of rules also defines the priority. The first
+non-empty element corresponding is selected and the other rules are
+not checked.
+** Child selection *>*
+Using *>* lets you capture different elements.  If the rule begins
+with an empty selector, that means it will search inside *feed* or
+*item* element.
+
+With author format, the rule *>author>name* try to capture the *name*
+element defined inside the *author* element defined inside *item*
+element. while the rule *feed>author>name* try to capture the *name*
+element defined inside the *author* element defined inside *feed*
+element defined somewhere in the dom.
+** Attribute selection *[attribute]*
+By default, the content of tag is selected. You may want to select an
+attribute of element using *[attribute]* selection.
+
+With htmlUrl format, the rule *>link[href]* select the value of
+attribute *href* inside a *link* element defined inside *feed* element.
+** Conditionnal selection *[attribute=value]*
+When parsing elements, you may want to test some attributes.
+
+With htmlUrl format, the rule *>link[rel=self][href]* try to capture
+the *href* attribute inside the *link* element that contains attribute
+*rel* with *self* value.
+** Star selection and customization
+Using Rss class, you may add different rules and select several
+elements inside feed.
+
+For example, you may want to get enclosure :
+http://foz.home.xs4all.nl/mod_enclosure.html
+
+Let use this example :
+http://www.rssboard.org/files/example-multiple-enclosures.xml
+
+If you try on [[./demo.php][demo]] page, the author is missing.
+
+As you can see in [[http://www.rssboard.org/files/example-multiple-enclosures.xml][xml]] author is defined with *itunes:author* tag
+defined in channel element.
+
+In order to add this rule to Rss class, you just need to add a rule to
+item author:
+#+begin_src php
+Rss::$itemFormat['author'][] = 'channel>itunes:author';
+#+end_src
+
+In order to get the first enclosure:
+#+begin_src php
+Rss::$itemFormat['enclosure'] = array('>enclosure[url]');
+#+end_src
+
+But you may want all enclosures by adding a star:
+#+begin_src php
+Rss::$itemFormat['enclosure'] = array('>enclosure*[url]');
+#+end_src
+** Advanced demo
+ :PROPERTIES:
+ :CUSTOM_ID: advanced-demo
+ :END:
+You can try the [[./demo-advanced.php][advanced demo]]:
+#+INCLUDE "./demo-advanced.php" src php
+
+* See alternatives
+ :PROPERTIES:
+ :CUSTOM_ID: alternatives
+ :END:
+ - http://www.milletmaxime.net/syndexport/
+ - https://github.com/fguillot/picoFeed
+ - http://lastrss.oslab.net/
+ - http://simplepie.org/
+* More infos about RSS/Atom
+  :PROPERTIES:
+  :CUSTOM_ID: info
+  :END:
+*** RSS 0.90
+**** spec
+***** http://www.rssboard.org/rss-0-9-0
+*** RSS 0.91
+**** spec
+***** http://www.rssboard.org/rss-0-9-1
+***** http://www.rssboard.org/rss-0-9-1-netscape
+**** examples
+***** http://cyber.law.harvard.edu/rss/examples/sampleRss091.xml
+***** http://static.userland.com/gems/backend/sampleRss.xml
+***** http://www.rssboard.org/files/sample-rss-091.xml
+*** RSS 0.92
+**** spec
+***** http://www.rssboard.org/rss-0-9-2
+**** examples
+***** http://cyber.law.harvard.edu/rss/examples/sampleRss092.xml
+***** http://www.rssboard.org/files/sample-rss-092.xml
+*** RSS 1.0
+**** spec
+***** http://web.resource.org/rss/1.0/spec
+**** examples
+***** http://web.resource.org/rss/1.0/spec#s7
+*** RSS 2.0
+**** spec
+***** http://cyber.law.harvard.edu/rss/rss.html
+***** http://www.rssboard.org/rss-specification
+**** examples
+***** http://cyber.law.harvard.edu/rss/examples/rss2sample.xml
+***** http://www.rssboard.org/files/sample-rss-2.xml
+***** http://www.rssboard.org/files/rss-2.0-sample.xml
+*** ATOM
+**** spec
+***** http://tools.ietf.org/html/4287
+

@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title>KrISS php5</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2013-08-31 12:04:27 CEST"/>
+<meta name="author" content="Tontof"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<style type="text/css"></style>
+<link rel="stylesheet" type="text/css" href="../../inc/style.css" />
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+ <a accesskey="h" href=".."> UP </a>
+ |
+ <a accesskey="H" href=".."> HOME </a>
+</div>
+
+<h1 class="title">KrISS php5</h1>
+
+<p>This session management class is based on <a href="http://sebsauvage.net/wiki/doku.php?id=php:session">Sebsauvage</a> code. It's very
+flexible and easy to customize.
+</p>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#features">1 Features </a></li>
+<li><a href="#how">2 How to use </a>
+<ul>
+<li><a href="#sec-2.1">2.1 login.php </a></li>
+<li><a href="#sec-2.2">2.2 index.php </a></li>
+<li><a href="#sec-2.3">2.3 logout.php </a></li>
+<li><a href="#sec-2.4">2.4 Session.php </a></li>
+</ul>
+</li>
+<li><a href="#options">3 Advanced options </a></li>
+<li><a href="#alternatives">4 See alternatives </a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-features" class="outline-2">
+<h2 id="features"><a name="sec-1" id="sec-1"></a><span class="section-number-2">1</span> Features </h2>
+<div class="outline-text-2" id="text-features">
+
+<ul>
+<li>
+Everything is stored on server-side (we do not trust client-side
+data, such as cookie expiration)
+</li>
+<li>
+IP addresses are checked on each access to prevent session cookie
+hijacking (such as Firesheep)
+</li>
+<li>
+Session expires on user inactivity (Session expiration date is
+automatically updated everytime the user accesses a page.)
+</li>
+<li>
+A unique secret key is generated on server-side for this session
+(and never sent over the wire) which can be used to sign forms
+(HMAC) (See <code>$_SESSION['uid']</code>)
+</li>
+<li>
+Token management to prevent XSRF attacks
+</li>
+<li>
+Brute force protection with ban management
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-how" class="outline-2">
+<h2 id="how"><a name="sec-2" id="sec-2"></a><span class="section-number-2">2</span> How to use </h2>
+<div class="outline-text-2" id="text-how">
+
+<p>In this example, login is <b>toto</b> and password is <b>titi</b>. 
+</p>
+</div>
+
+<div id="outline-container-2.1" class="outline-3">
+<h3 id="sec-2.1"><span class="section-number-3">2.1</span> login.php </h3>
+<div class="outline-text-3" id="text-2.1">
+
+<p>A simple form to <a href="./login.php">sign in</a>.
+</p>
+
+
+<pre class="src src-php"><span class="org-preprocessor">&lt;?php</span> 
+    <span class="org-keyword">include</span> <span class="org-string">'Session.php'</span>; <span class="org-type">Session</span>::<span class="org-default">init(</span>);
+
+    <span class="org-keyword">if</span> (<span class="org-default">isset(</span>$<span class="org-constant">_POST</span>[<span class="org-string">'login'</span>]) &amp;&amp; <span class="org-default">isset(</span>$<span class="org-constant">_POST</span>[<span class="org-string">'password'</span>])
+        &amp;&amp; <span class="org-type">Session</span>::<span class="org-default">login(</span>$<span class="org-constant">_POST</span>[<span class="org-string">'login'</span>], $<span class="org-constant">_POST</span>[<span class="org-string">'password'</span>], <span class="org-string">'toto'</span>, <span class="org-string">'titi'</span>)) {
+        <span class="org-default">header(</span><span class="org-string">'Location: index.php'</span>);
+    }
+<span class="org-preprocessor">?&gt;</span>
+<span class="org-constant">&lt;html&gt;</span>
+  <span class="org-constant">&lt;head&gt;&lt;title&gt;</span><span class="org-warning">Login</span><span class="org-constant">&lt;/title&gt;&lt;/head&gt;</span>
+  <span class="org-constant">&lt;body&gt;</span>
+    <span class="org-constant">&lt;form</span> <span class="org-constant">method=</span><span class="org-string">"post"</span> <span class="org-constant">action=</span><span class="org-string">"login.php"</span><span class="org-constant">&gt;</span>
+      <span class="org-warning">Please</span> <span class="org-warning">login</span>:<span class="org-constant">&lt;br&gt;</span>
+      <span class="org-warning">Login</span> : <span class="org-constant">&lt;input</span> <span class="org-constant">type=</span><span class="org-string">"text"</span> <span class="org-constant">name=</span><span class="org-string">"login"</span><span class="org-constant">&gt;</span> <span class="org-constant">&lt;br&gt;</span>
+      <span class="org-warning">Password</span> : <span class="org-constant">&lt;input</span> <span class="org-constant">type=</span><span class="org-string">"password"</span> <span class="org-constant">name=</span><span class="org-string">"password"</span><span class="org-constant">&gt;</span>
+      <span class="org-constant">&lt;input</span> <span class="org-constant">type=</span><span class="org-string">"submit"</span> <span class="org-constant">value=</span><span class="org-string">"Login"</span><span class="org-constant">&gt;</span>
+    <span class="org-constant">&lt;/form&gt;</span>
+  <span class="org-constant">&lt;/body&gt;</span>
+<span class="org-constant">&lt;/html&gt;</span>
+</pre>
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2.2" class="outline-3">
+<h3 id="sec-2.2"><span class="section-number-3">2.2</span> index.php </h3>
+<div class="outline-text-3" id="text-2.2">
+
+<p>This <a href="./index.php">index</a> page is only accessible to connected people, otherwise it
+redirects to login page.
+</p>
+
+
+<pre class="src src-php"><span class="org-preprocessor">&lt;?php</span> 
+    <span class="org-keyword">include</span> <span class="org-string">'Session.php'</span>; <span class="org-type">Session</span>::<span class="org-default">init(</span>);
+
+    <span class="org-keyword">if</span> (!<span class="org-type">Session</span>::<span class="org-default">isLogged(</span>)) {
+        <span class="org-default">header(</span><span class="org-string">'Location: login.php'</span>);
+    }
+<span class="org-preprocessor">?&gt;</span>
+<span class="org-constant">&lt;html&gt;</span>
+<span class="org-constant">&lt;head&gt;&lt;title&gt;</span><span class="org-warning">Index</span><span class="org-constant">&lt;/title&gt;&lt;/head&gt;</span>
+<span class="org-constant">&lt;body&gt;</span>
+<span class="org-warning">Hello</span> <span class="org-preprocessor">&lt;?php</span> <span class="org-keyword">print</span> $<span class="org-constant">_SESSION</span>[<span class="org-string">'username'</span>]; <span class="org-preprocessor">?&gt;</span>, <span class="org-warning">you</span> <span class="org-warning">are</span> <span class="org-warning">logged</span> <span class="org-warning">in</span>.<span class="org-constant">&lt;br&gt;</span>
+<span class="org-constant">&lt;a</span> <span class="org-constant">href=</span><span class="org-string">"logout.php"</span><span class="org-constant">&gt;</span><span class="org-warning">Logout</span><span class="org-constant">&lt;/a&gt;</span>
+<span class="org-constant">&lt;/body&gt;</span>
+<span class="org-constant">&lt;/html&gt;</span>
+</pre>
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2.3" class="outline-3">
+<h3 id="sec-2.3"><span class="section-number-3">2.3</span> logout.php </h3>
+<div class="outline-text-3" id="text-2.3">
+
+<p>In order to <a href="./logout">sign out</a>.
+</p>
+
+
+<pre class="src src-php"><span class="org-preprocessor">&lt;?php</span> 
+    <span class="org-keyword">include</span> <span class="org-string">'Session.php'</span>; <span class="org-type">Session</span>::<span class="org-default">init(</span>);
+
+    <span class="org-type">Session</span>::<span class="org-default">logout(</span>);
+    <span class="org-default">header(</span><span class="org-string">'Location: login.php'</span>);
+<span class="org-preprocessor">?&gt;</span>
+</pre>
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2.4" class="outline-3">
+<h3 id="sec-2.4"><span class="section-number-3">2.4</span> Session.php </h3>
+<div class="outline-text-3" id="text-2.4">
+
+<p>The session management class is available on github : <a href="https://raw.github.com/tontof/kriss_php5/master/Session.php">https://raw.github.com/tontof/kriss_php5/master/Session.php</a>
+</p>
+
+
+<pre class="src src-php"><span class="org-preprocessor">&lt;?php</span>
+<span class="org-comment-delimiter">/**</span><span class="org-comment">
+ * Session management class
+ *
+ * http://www.developpez.net/forums/d51943/php/langage/sessions/
+ * http://sebsauvage.net/wiki/doku.php?id=php:session
+ * http://sebsauvage.net/wiki/doku.php?id=php:shaarli
+ * 
+ * Features:
+ * - Everything is stored on server-side (we do not trust client-side data,
+ *   such as cookie expiration)
+ * - IP addresses are checked on each access to prevent session cookie hijacking
+ *   (such as Firesheep)
+ * - Session expires on user inactivity (Session expiration date is
+ *   automatically updated everytime the user accesses a page.)
+ * - A unique secret key is generated on server-side for this session
+ *   (and never sent over the wire) which can be used to sign forms (HMAC)
+ *   (See $_SESSION['uid'])
+ * - Token management to prevent XSRF attacks
+ * - Brute force protection with ban management
+ *
+ * TODOs
+ * - Replace globals with variables in Session class
+ *
+ * How to use:
+ * - http://tontof.net/kriss/php5#session
+ </span><span class="org-comment-delimiter">*/</span>
+<span class="org-keyword">class</span> <span class="org-type">Session</span>
+{
+    <span class="org-comment-delimiter">// </span><span class="org-comment">Personnalize PHP session name
+</span>    <span class="org-keyword">public</span> <span class="org-keyword">static</span> $<span class="org-variable-name">sessionName</span> = <span class="org-string">''</span>;
+    <span class="org-comment-delimiter">// </span><span class="org-comment">If the user does not access any page within this time,
+</span>    <span class="org-comment-delimiter">// </span><span class="org-comment">his/her session is considered expired (3600 sec. = 1 hour)
+</span>    <span class="org-keyword">public</span> <span class="org-keyword">static</span> $<span class="org-variable-name">inactivityTimeout</span> = <span class="org-default">3600</span>;
+    <span class="org-comment-delimiter">// </span><span class="org-comment">If you get disconnected often or if your IP address changes often.
+</span>    <span class="org-comment-delimiter">// </span><span class="org-comment">Let you disable session cookie hijacking protection
+</span>    <span class="org-keyword">public</span> <span class="org-keyword">static</span> $<span class="org-variable-name">disableSessionProtection</span> = <span class="org-constant">false</span>;
+    <span class="org-comment-delimiter">// </span><span class="org-comment">Ban IP after this many failures.
+</span>    <span class="org-keyword">public</span> <span class="org-keyword">static</span> $<span class="org-variable-name">banAfter</span> = <span class="org-default">4</span>;
+    <span class="org-comment-delimiter">// </span><span class="org-comment">Ban duration for IP address after login failures (in seconds).
+</span>    <span class="org-comment-delimiter">// </span><span class="org-comment">(1800 sec. = 30 minutes)
+</span>    <span class="org-keyword">public</span> <span class="org-keyword">static</span> $<span class="org-variable-name">banDuration</span> = <span class="org-default">1800</span>;
+    <span class="org-comment-delimiter">// </span><span class="org-comment">File storage for failures and bans. If empty, no ban management.
+</span>    <span class="org-keyword">public</span> <span class="org-keyword">static</span> $<span class="org-variable-name">banFile</span> = <span class="org-string">''</span>;
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Initialize session
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">init</span>()
+    {
+        <span class="org-comment-delimiter">// </span><span class="org-comment">Force cookie path (but do not change lifetime)
+</span>        $<span class="org-variable-name">cookie</span> = <span class="org-default">session_get_cookie_params(</span>);
+        <span class="org-comment-delimiter">// </span><span class="org-comment">Default cookie expiration and path.
+</span>        $<span class="org-variable-name">cookiedir</span> = <span class="org-string">''</span>;
+        <span class="org-keyword">if</span> (<span class="org-default">dirname(</span>$<span class="org-constant">_SERVER</span>[<span class="org-string">'SCRIPT_NAME'</span>])!=<span class="org-string">'/'</span>) {
+            $<span class="org-variable-name">cookiedir</span> = <span class="org-default">dirname(</span>$<span class="org-constant">_SERVER</span>[<span class="org-string">"SCRIPT_NAME"</span>]).<span class="org-string">'/'</span>;
+        }
+        <span class="org-default">session_set_cookie_params(</span>$<span class="org-variable-name">cookie</span>[<span class="org-string">'lifetime'</span>], $<span class="org-variable-name">cookiedir</span>);
+        <span class="org-comment-delimiter">// </span><span class="org-comment">Use cookies to store session.
+</span>        <span class="org-default">ini_set(</span><span class="org-string">'session.use_cookies'</span>, <span class="org-default">1</span>);
+        <span class="org-comment-delimiter">// </span><span class="org-comment">Force cookies for session  (phpsessionID forbidden in URL)
+</span>        <span class="org-default">ini_set(</span><span class="org-string">'session.use_only_cookies'</span>, <span class="org-default">1</span>);
+        <span class="org-keyword">if</span> (!<span class="org-default">session_id(</span>)) {
+            <span class="org-comment-delimiter">// </span><span class="org-comment">Prevent php to use sessionID in URL if cookies are disabled.
+</span>            <span class="org-default">ini_set(</span><span class="org-string">'session.use_trans_sid'</span>, <span class="org-constant">false</span>);
+            <span class="org-keyword">if</span> (!<span class="org-default">empty(</span><span class="org-constant">self</span>::$<span class="org-variable-name">sessionName</span>)) {
+                <span class="org-default">session_name(</span><span class="org-constant">self</span>::$<span class="org-variable-name">sessionName</span>);
+            }
+            <span class="org-default">session_start(</span>);
+        }
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Returns the IP address
+     * (Used to prevent session cookie hijacking.)
+     *
+     * @return string IP addresses
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">private</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">_allIPs</span>()
+    {
+        $<span class="org-variable-name">ip</span> = $<span class="org-constant">_SERVER</span>[<span class="org-string">"REMOTE_ADDR"</span>];
+        $<span class="org-variable-name">ip</span>.= <span class="org-default">isset(</span>$<span class="org-constant">_SERVER</span>[<span class="org-string">'HTTP_X_FORWARDED_FOR'</span>]) ? <span class="org-string">'_'</span>.$<span class="org-constant">_SERVER</span>[<span class="org-string">'HTTP_X_FORWARDED_FOR'</span>] : <span class="org-string">''</span>;
+        $<span class="org-variable-name">ip</span>.= <span class="org-default">isset(</span>$<span class="org-constant">_SERVER</span>[<span class="org-string">'HTTP_CLIENT_IP'</span>]) ? <span class="org-string">'_'</span>.$<span class="org-constant">_SERVER</span>[<span class="org-string">'HTTP_CLIENT_IP'</span>] : <span class="org-string">''</span>;
+
+        <span class="org-keyword">return</span> $<span class="org-variable-name">ip</span>;
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Check that user/password is correct and then init some SESSION variables.
+     *
+     * @param string $login        Login reference
+     * @param string $password     Password reference
+     * @param string $loginTest    Login to compare with login reference
+     * @param string $passwordTest Password to compare with password reference
+     * @param array  $pValues      Array of variables to store in SESSION
+     *
+     * @return true|false          True if login and password are correct, false
+     *                             otherwise
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">login</span> (
+        $<span class="org-variable-name">login</span>,
+        $<span class="org-variable-name">password</span>,
+        $<span class="org-variable-name">loginTest</span>,
+        $<span class="org-variable-name">passwordTest</span>,
+        $<span class="org-variable-name">pValues</span> = <span class="org-default">array(</span>))
+    {
+        <span class="org-constant">self</span>::<span class="org-default">banInit(</span>);
+        <span class="org-keyword">if</span> (<span class="org-constant">self</span>::<span class="org-default">banCanLogin(</span>)) {
+            <span class="org-keyword">if</span> ($<span class="org-variable-name">login</span> === $<span class="org-variable-name">loginTest</span> &amp;&amp; $<span class="org-variable-name">password</span> === $<span class="org-variable-name">passwordTest</span>) {
+                <span class="org-constant">self</span>::<span class="org-default">banLoginOk(</span>);
+                <span class="org-comment-delimiter">// </span><span class="org-comment">Generate unique random number to sign forms (HMAC)
+</span>                $<span class="org-constant">_SESSION</span>[<span class="org-string">'uid'</span>] = <span class="org-default">sha1(uniqid(</span><span class="org-string">''</span>, <span class="org-constant">true</span>).<span class="org-string">'_'</span>.<span class="org-default">mt_rand(</span>));
+                $<span class="org-constant">_SESSION</span>[<span class="org-string">'ip'</span>] = <span class="org-constant">self</span>::<span class="org-default">_allIPs(</span>);
+                $<span class="org-constant">_SESSION</span>[<span class="org-string">'username'</span>] = $<span class="org-variable-name">login</span>;
+                <span class="org-comment-delimiter">// </span><span class="org-comment">Set session expiration.
+</span>                $<span class="org-constant">_SESSION</span>[<span class="org-string">'expires_on'</span>] = <span class="org-default">time(</span>) + <span class="org-constant">self</span>::$<span class="org-variable-name">inactivityTimeout</span>;
+
+                <span class="org-keyword">foreach</span> ($<span class="org-variable-name">pValues</span> <span class="org-keyword">as</span> $<span class="org-variable-name">key</span> =<span class="org-constant">&gt;</span> $<span class="org-variable-name">value</span>) {
+                    $<span class="org-constant">_SESSION</span>[$<span class="org-variable-name">key</span>] = $<span class="org-variable-name">value</span>;
+                }
+
+                <span class="org-keyword">return</span> <span class="org-constant">true</span>;
+            }
+            <span class="org-constant">self</span>::<span class="org-default">banLoginFailed(</span>);
+        }
+
+        <span class="org-keyword">return</span> <span class="org-constant">false</span>;
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Unset SESSION variable to force logout
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">logout</span>()
+    {
+        <span class="org-default">unset(</span>$<span class="org-constant">_SESSION</span>[<span class="org-string">'uid'</span>], $<span class="org-constant">_SESSION</span>[<span class="org-string">'ip'</span>], $<span class="org-constant">_SESSION</span>[<span class="org-string">'expires_on'</span>]);
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Make sure user is logged in.
+     *
+     * @return true|false True if user is logged in, false otherwise
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">isLogged</span>()
+    {
+        <span class="org-keyword">if</span> (!<span class="org-default">isset (</span>$<span class="org-constant">_SESSION</span>[<span class="org-string">'uid'</span>])
+            || (<span class="org-constant">self</span>::$<span class="org-variable-name">disableSessionProtection</span> === <span class="org-constant">false</span>
+                &amp;&amp; $<span class="org-constant">_SESSION</span>[<span class="org-string">'ip'</span>] !== <span class="org-constant">self</span>::<span class="org-default">_allIPs(</span>))
+            || <span class="org-default">time(</span>) &gt;= $<span class="org-constant">_SESSION</span>[<span class="org-string">'expires_on'</span>]) {
+            <span class="org-constant">self</span>::<span class="org-default">logout(</span>);
+
+            <span class="org-keyword">return</span> <span class="org-constant">false</span>;
+        }
+        <span class="org-comment-delimiter">// </span><span class="org-comment">User accessed a page : Update his/her session expiration date.
+</span>        $<span class="org-constant">_SESSION</span>[<span class="org-string">'expires_on'</span>] = <span class="org-default">time(</span>) + <span class="org-constant">self</span>::$<span class="org-variable-name">inactivityTimeout</span>;
+
+        <span class="org-keyword">return</span> <span class="org-constant">true</span>;
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Create a token, store it in SESSION and return it
+     *
+     * @param string $salt to prevent birthday attack
+     *
+     * @return string Token created
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">getToken</span>($<span class="org-variable-name">salt</span> = <span class="org-string">''</span>)
+    {
+        <span class="org-keyword">if</span> (!<span class="org-default">isset(</span>$<span class="org-constant">_SESSION</span>[<span class="org-string">'tokens'</span>])) {
+            $<span class="org-constant">_SESSION</span>[<span class="org-string">'tokens'</span>]=<span class="org-default">array(</span>);
+        }
+        <span class="org-comment-delimiter">// </span><span class="org-comment">We generate a random string and store it on the server side.
+</span>        $<span class="org-variable-name">rnd</span> = <span class="org-default">sha1(uniqid(</span><span class="org-string">''</span>, <span class="org-constant">true</span>).<span class="org-string">'_'</span>.<span class="org-default">mt_rand(</span>).$<span class="org-variable-name">salt</span>);
+        $<span class="org-constant">_SESSION</span>[<span class="org-string">'tokens'</span>][$<span class="org-variable-name">rnd</span>]=<span class="org-default">1</span>;
+
+        <span class="org-keyword">return</span> $<span class="org-variable-name">rnd</span>;
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Tells if a token is ok. Using this function will destroy the token.
+     *
+     * @param string $token Token to test
+     *
+     * @return true|false   True if token is correct, false otherwise
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">isToken</span>($<span class="org-variable-name">token</span>)
+    {
+        <span class="org-keyword">if</span> (<span class="org-default">isset(</span>$<span class="org-constant">_SESSION</span>[<span class="org-string">'tokens'</span>][$<span class="org-variable-name">token</span>])) {
+            <span class="org-default">unset(</span>$<span class="org-constant">_SESSION</span>[<span class="org-string">'tokens'</span>][$<span class="org-variable-name">token</span>]); <span class="org-comment-delimiter">// </span><span class="org-comment">Token is used: destroy it.
+</span>
+            <span class="org-keyword">return</span> <span class="org-constant">true</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">Token is ok.
+</span>        }
+
+        <span class="org-keyword">return</span> <span class="org-constant">false</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">Wrong token, or already used.
+</span>    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Signal a failed login. Will ban the IP if too many failures:
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">banLoginFailed</span>()
+    {
+        $<span class="org-variable-name">ip</span> = $<span class="org-constant">_SERVER</span>[<span class="org-string">"REMOTE_ADDR"</span>];
+        $<span class="org-variable-name">gb</span> = $<span class="org-constant">GLOBALS</span>[<span class="org-string">'IPBANS'</span>];
+
+        <span class="org-keyword">if</span> (!<span class="org-default">isset(</span>$<span class="org-variable-name">gb</span>[<span class="org-string">'FAILURES'</span>][$<span class="org-variable-name">ip</span>])) {
+            $<span class="org-variable-name">gb</span>[<span class="org-string">'FAILURES'</span>][$<span class="org-variable-name">ip</span>] = <span class="org-default">0</span>;
+        }
+        $<span class="org-variable-name">gb</span>[<span class="org-string">'FAILURES'</span>][$<span class="org-variable-name">ip</span>]++;
+        <span class="org-keyword">if</span> ($<span class="org-variable-name">gb</span>[<span class="org-string">'FAILURES'</span>][$<span class="org-variable-name">ip</span>] &gt; (<span class="org-constant">self</span>::$<span class="org-variable-name">banAfter</span> - <span class="org-default">1</span>)) {
+            $<span class="org-variable-name">gb</span>[<span class="org-string">'BANS'</span>][$<span class="org-variable-name">ip</span>]= <span class="org-default">time(</span>) + <span class="org-constant">self</span>::$<span class="org-variable-name">banDuration</span>;
+        }
+
+        $<span class="org-constant">GLOBALS</span>[<span class="org-string">'IPBANS'</span>] = $<span class="org-variable-name">gb</span>;
+        <span class="org-default">file_put_contents(</span><span class="org-constant">self</span>::$<span class="org-variable-name">banFile</span>, <span class="org-string">"&lt;?php\n\$GLOBALS['IPBANS']="</span>.<span class="org-default">var_export(</span>$<span class="org-variable-name">gb</span>, <span class="org-constant">true</span>).<span class="org-string">";\n?&gt;"</span>);
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Signals a successful login. Resets failed login counter.
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">banLoginOk</span>()
+    {
+        $<span class="org-variable-name">ip</span> = $<span class="org-constant">_SERVER</span>[<span class="org-string">"REMOTE_ADDR"</span>];
+        $<span class="org-variable-name">gb</span> = $<span class="org-constant">GLOBALS</span>[<span class="org-string">'IPBANS'</span>];
+        <span class="org-default">unset(</span>$<span class="org-variable-name">gb</span>[<span class="org-string">'FAILURES'</span>][$<span class="org-variable-name">ip</span>]); <span class="org-default">unset(</span>$<span class="org-variable-name">gb</span>[<span class="org-string">'BANS'</span>][$<span class="org-variable-name">ip</span>]);
+        $<span class="org-constant">GLOBALS</span>[<span class="org-string">'IPBANS'</span>] = $<span class="org-variable-name">gb</span>;
+        <span class="org-default">file_put_contents(</span><span class="org-constant">self</span>::$<span class="org-variable-name">banFile</span>, <span class="org-string">"&lt;?php\n\$GLOBALS['IPBANS']="</span>.<span class="org-default">var_export(</span>$<span class="org-variable-name">gb</span>, <span class="org-constant">true</span>).<span class="org-string">";\n?&gt;"</span>);
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Ban init
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">banInit</span>()
+    {
+        <span class="org-keyword">if</span> (!<span class="org-default">is_file(</span><span class="org-constant">self</span>::$<span class="org-variable-name">banFile</span>) &amp;&amp; <span class="org-constant">self</span>::$<span class="org-variable-name">banFile</span> !== <span class="org-string">''</span>) {
+            <span class="org-default">file_put_contents(</span><span class="org-constant">self</span>::$<span class="org-variable-name">banFile</span>, <span class="org-string">"&lt;?php\n\$GLOBALS['IPBANS']="</span>.<span class="org-default">var_export(array(</span><span class="org-string">'FAILURES'</span>=<span class="org-constant">&gt;</span><span class="org-default">array(</span>), <span class="org-string">'BANS'</span>=&gt;<span class="org-default">array(</span>)), <span class="org-constant">true</span>).<span class="org-string">";\n?&gt;"</span>);
+        }
+        <span class="org-keyword">if</span> (<span class="org-constant">self</span>::$<span class="org-variable-name">banFile</span> !== <span class="org-string">''</span>) {
+            <span class="org-keyword">include</span> <span class="org-constant">self</span>::$<span class="org-variable-name">banFile</span>;
+        }
+    }
+
+    <span class="org-comment-delimiter">/**</span><span class="org-comment">
+     * Checks if the user CAN login. If 'true', the user can try to login.
+     *
+     * @return boolean true if user is banned, false otherwise
+     </span><span class="org-comment-delimiter">*/</span>
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-keyword">function</span> <span class="org-function-name">banCanLogin</span>()
+    {
+        $<span class="org-variable-name">ip</span> = $<span class="org-constant">_SERVER</span>[<span class="org-string">"REMOTE_ADDR"</span>];
+        $<span class="org-variable-name">gb</span> = $<span class="org-constant">GLOBALS</span>[<span class="org-string">'IPBANS'</span>];
+        <span class="org-keyword">if</span> (<span class="org-default">isset(</span>$<span class="org-variable-name">gb</span>[<span class="org-string">'BANS'</span>][$<span class="org-variable-name">ip</span>])) {
+            <span class="org-comment-delimiter">// </span><span class="org-comment">User is banned. Check if the ban has expired:
+</span>            <span class="org-keyword">if</span> ($<span class="org-variable-name">gb</span>[<span class="org-string">'BANS'</span>][$<span class="org-variable-name">ip</span>] &lt;= <span class="org-default">time(</span>)) {
+                <span class="org-comment-delimiter">// </span><span class="org-comment">Ban expired, user can try to login again.
+</span>                <span class="org-default">unset(</span>$<span class="org-variable-name">gb</span>[<span class="org-string">'FAILURES'</span>][$<span class="org-variable-name">ip</span>]);
+                <span class="org-default">unset(</span>$<span class="org-variable-name">gb</span>[<span class="org-string">'BANS'</span>][$<span class="org-variable-name">ip</span>]);
+                <span class="org-default">file_put_contents(</span><span class="org-constant">self</span>::$<span class="org-variable-name">banFile</span>, <span class="org-string">"&lt;?php\n\$GLOBALS['IPBANS']="</span>.<span class="org-default">var_export(</span>$<span class="org-variable-name">gb</span>, <span class="org-constant">true</span>).<span class="org-string">";\n?&gt;"</span>);
+
+                <span class="org-keyword">return</span> <span class="org-constant">true</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">Ban has expired, user can login.
+</span>            }
+
+            <span class="org-keyword">return</span> <span class="org-constant">false</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">User is banned.
+</span>        }
+
+        <span class="org-keyword">return</span> <span class="org-constant">true</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">User is not banned.
+</span>    }
+}
+</pre>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-options" class="outline-2">
+<h2 id="options"><a name="sec-3" id="sec-3"></a><span class="section-number-2">3</span> Advanced options </h2>
+<div class="outline-text-2" id="text-options">
+
+
+
+
+<pre class="src src-php"><span class="org-preprocessor">&lt;?php</span> 
+    <span class="org-keyword">include</span> <span class="org-string">'Session.php'</span>;
+
+    <span class="org-comment-delimiter">// </span><span class="org-comment">Personnalize PHP session name
+</span>    <span class="org-type">Session</span>::$<span class="org-variable-name">sessionName</span> = <span class="org-string">'kriss'</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">default is empty
+</span>    <span class="org-comment-delimiter">// </span><span class="org-comment">If the user does not access any page within this time,
+</span>    <span class="org-comment-delimiter">// </span><span class="org-comment">his/her session is considered expired (3600 sec. = 1 hour)
+</span>    <span class="org-type">Session</span>::$<span class="org-variable-name">inactivityTimeout</span> = <span class="org-default">7200</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">default is 3600
+</span>    <span class="org-comment-delimiter">// </span><span class="org-comment">If you get disconnected often or if your IP address changes often.
+</span>    <span class="org-comment-delimiter">// </span><span class="org-comment">Let you disable session cookie hijacking protection
+</span>    <span class="org-type">Session</span>::$<span class="org-variable-name">disableSessionProtection</span> = <span class="org-constant">true</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">default is false
+</span>    <span class="org-comment-delimiter">// </span><span class="org-comment">Ban IP after this many failures.
+</span>    <span class="org-type">Session</span>::$<span class="org-variable-name">banAfter</span> = <span class="org-default">5</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">default is 4
+</span>    <span class="org-comment-delimiter">// </span><span class="org-comment">Ban duration for IP address after login failures (in seconds).
+</span>    <span class="org-comment-delimiter">// </span><span class="org-comment">(1800 sec. = 30 minutes)
+</span>    <span class="org-type">Session</span>::$<span class="org-variable-name">banDuration</span> = <span class="org-default">3600</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">default is 1800
+</span>    <span class="org-comment-delimiter">// </span><span class="org-comment">File storage for failures and bans. If empty, no ban management.
+</span>    <span class="org-type">Session</span>::$<span class="org-variable-name">banFile</span> = <span class="org-string">'ipbans.php'</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">default is empty
+</span>
+    <span class="org-type">Session</span>::<span class="org-default">init(</span>);
+<span class="org-preprocessor">?&gt;</span>
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-alternatives" class="outline-2">
+<h2 id="alternatives"><a name="sec-4" id="sec-4"></a><span class="section-number-2">4</span> See alternatives </h2>
+<div class="outline-text-2" id="text-alternatives">
+
+<ul>
+<li>
+<a href="http://sebsauvage.net/wiki/doku.php?id=php:session">http://sebsauvage.net/wiki/doku.php?id=php:session</a>
+</li>
+<li>
+<a href="http://www.warriordudimanche.net/article163/auto-restrict-2-0-un-fichier-pour-les-verrouiller-tous">http://www.warriordudimanche.net/article163/auto-restrict-2-0-un-fichier-pour-les-verrouiller-tous</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="postamble">
+<p class="date"> Date: 2013-08-31 12:04:27 CEST</p>
+</div>
+</div>
+</body>
+</html>

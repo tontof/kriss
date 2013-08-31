@@ -1,0 +1,83 @@
+#+OPTIONS:    toc:2 author:nil creator:nil
+#+STARTUP:    align
+#+TITLE:      KrISS php5
+#+AUTHOR:     Tontof
+#+LANGUAGE:   en
+#+STYLE:      <style type="text/css"></style>
+#+LINK_UP:    ..
+#+LINK_HOME:  ..
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+STYLE: <link rel="stylesheet" type="text/css" href="../../inc/style.css" />
+
+This session management class is based on [[http://sebsauvage.net/wiki/doku.php?id=php:session][Sebsauvage]] code. It's very
+flexible and easy to customize.
+* Features
+ :PROPERTIES:
+ :CUSTOM_ID: features
+ :END:
+ - Everything is stored on server-side (we do not trust client-side
+   data, such as cookie expiration)
+ - IP addresses are checked on each access to prevent session cookie
+   hijacking (such as Firesheep)
+ - Session expires on user inactivity (Session expiration date is
+   automatically updated everytime the user accesses a page.)
+ - A unique secret key is generated on server-side for this session
+   (and never sent over the wire) which can be used to sign forms
+   (HMAC) (See ~$_SESSION['uid']~)
+ - Token management to prevent XSRF attacks
+ - Brute force protection with ban management
+* How to use
+  :PROPERTIES:
+  :CUSTOM_ID: how
+  :END:
+In this example, login is *toto* and password is *titi*. 
+** login.php
+A simple form to [[./login.php][sign in]].
+#+INCLUDE: "./login.php" src php
+
+** index.php
+This [[./index.php][index]] page is only accessible to connected people, otherwise it
+redirects to login page.
+#+INCLUDE: "./index.php" src php
+
+** logout.php
+In order to [[./logout][sign out]].
+#+INCLUDE: "./logout.php" src php
+
+** Session.php
+The session management class is available on github : https://raw.github.com/tontof/kriss_php5/master/Session.php
+#+INCLUDE: "./Session.php" src php
+
+* Advanced options
+  :PROPERTIES:
+  :CUSTOM_ID: options
+  :END:
+#+begin_src php
+<?php 
+    include 'Session.php';
+
+    // Personnalize PHP session name
+    Session::$sessionName = 'kriss'; // default is empty
+    // If the user does not access any page within this time,
+    // his/her session is considered expired (3600 sec. = 1 hour)
+    Session::$inactivityTimeout = 7200; // default is 3600
+    // If you get disconnected often or if your IP address changes often.
+    // Let you disable session cookie hijacking protection
+    Session::$disableSessionProtection = true; // default is false
+    // Ban IP after this many failures.
+    Session::$banAfter = 5; // default is 4
+    // Ban duration for IP address after login failures (in seconds).
+    // (1800 sec. = 30 minutes)
+    Session::$banDuration = 3600; // default is 1800
+    // File storage for failures and bans. If empty, no ban management.
+    Session::$banFile = 'ipbans.php'; // default is empty
+
+    Session::init();
+?>
+#+end_src
+* See alternatives
+ :PROPERTIES:
+ :CUSTOM_ID: alternatives
+ :END:
+ - http://sebsauvage.net/wiki/doku.php?id=php:session
+ - http://www.warriordudimanche.net/article163/auto-restrict-2-0-un-fichier-pour-les-verrouiller-tous
