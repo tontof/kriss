@@ -23,7 +23,7 @@
  * - Replace globals with variables in Session class
  *
  * How to use:
- * - http://tontof.net/kriss/php5#session
+ * - http://tontof.net/kriss/php5/session
  */
 class Session
 {
