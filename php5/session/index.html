@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>KrISS php5</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2013-08-31 14:31:20 CEST"/>
+<meta name="generated" content="2013-09-13 19:39:34 CEST"/>
 <meta name="author" content="Tontof"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -302,7 +302,7 @@ redirects to login page.
         <span class="org-keyword">if</span> (<span class="org-default">isset(</span>$<span class="org-constant">_SERVER</span>[<span class="org-string">"HTTPS"</span>]) &amp;&amp; $<span class="org-constant">_SERVER</span>[<span class="org-string">"HTTPS"</span>] == <span class="org-string">"on"</span>) {
             $<span class="org-variable-name">ssl</span> = <span class="org-constant">true</span>;
         }
-        <span class="org-default">session_set_cookie_params(</span>$<span class="org-variable-name">cookie</span>[<span class="org-string">'lifetime'</span>], $<span class="org-variable-name">cookiedir</span>, $<span class="org-variable-name">cookie</span>[<span class="org-string">'domain'</span>], $<span class="org-variable-name">ssl</span>);
+        <span class="org-default">session_set_cookie_params(</span>$<span class="org-variable-name">cookie</span>[<span class="org-string">'lifetime'</span>], $<span class="org-variable-name">cookiedir</span>, $<span class="org-constant">_SERVER</span>[<span class="org-string">'HTTP_HOST'</span>], $<span class="org-variable-name">ssl</span>);
         <span class="org-comment-delimiter">// </span><span class="org-comment">Use cookies to store session.
 </span>        <span class="org-default">ini_set(</span><span class="org-string">'session.use_cookies'</span>, <span class="org-default">1</span>);
         <span class="org-comment-delimiter">// </span><span class="org-comment">Force cookies for session  (phpsessionID forbidden in URL)
@@ -399,6 +399,9 @@ redirects to login page.
         }
         <span class="org-comment-delimiter">// </span><span class="org-comment">User accessed a page : Update his/her session expiration date.
 </span>        $<span class="org-constant">_SESSION</span>[<span class="org-string">'expires_on'</span>] = <span class="org-default">time(</span>) + <span class="org-constant">self</span>::$<span class="org-variable-name">inactivityTimeout</span>;
+        <span class="org-keyword">if</span> (!<span class="org-default">empty(</span>$<span class="org-constant">_SESSION</span>[<span class="org-string">'longlastingsession'</span>])) {
+                $<span class="org-constant">_SESSION</span>[<span class="org-string">'expires_on'</span>] += $<span class="org-constant">_SESSION</span>[<span class="org-string">'longlastingsession'</span>];
+        }
 
         <span class="org-keyword">return</span> <span class="org-constant">true</span>;
     }
@@ -578,7 +581,7 @@ redirects to login page.
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2013-08-31 14:31:20 CEST</p>
+<p class="date"> Date: 2013-09-13 19:39:34 CEST</p>
 </div>
 </div>
 </body>
