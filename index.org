@@ -1,6 +1,6 @@
 #+OPTIONS:    toc:nil author:nil creator:nil
 #+STARTUP:    align
-#+TITLE:      KrISS : simple and smart (or stupid) apps
+#+TITLE:      KrISS : simple and smart (or stupid) code
 #+AUTHOR:     Tontof
 #+LANGUAGE:   en
 #+STYLE:      <style type="text/css"></style>
@@ -19,7 +19,7 @@
 ** KrISS pass: A simple and smart (or stupid) password manager     :noexport:
 ** KrISS pipl: A simple and smart (or stupid) contact manager      :noexport:
 ** KrISS prox: A simple and smart (or stupid) proxy                :noexport:
-* Here are just my simple and smart (or stupid) bookmarklets:      :noexport:
+* Here are just my simple and smart (or stupid) bookmarklets:
+  - [[./dwld][KrISS dwld]]: A simple and smart (or stupid) downloader bookmarklet
 ** KrISS html: A simple and smart (or stupid) html page manager    :noexport:
-** KrISS vidz: A simple and smart (or stupid) videos downloader    :noexport:
   
