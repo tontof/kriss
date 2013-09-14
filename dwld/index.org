@@ -37,7 +37,7 @@ external service!
 
 * Standalone bookmarklets
 Following bookmarklet(s) do not rely on http://tontof.net so they will
-not be up-to-date automatically.
+not be update automatically.
 ** Youtube
   :PROPERTIES:
   :CUSTOM_ID: youtube
