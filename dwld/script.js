@@ -9,7 +9,7 @@
     
     switch (host){
     case 'www.youtube.com':
-        src = '//tontof.net/kriss/dwld/youtube.js?";
+        src = "//tontof.net/kriss/dwld/youtube.js?";
         break;
     default:
         src = "//tontof.net/kriss/dwld/others.js?";
