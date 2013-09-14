@@ -15,7 +15,7 @@ Feel free to contribute: https://github.com/tontof/kriss_dwld
 
 * KrISS dwld bookmarklet
 #+HTML:<div id="instructions">Drag the browser button link into your Bookmarks Toolbar:</div>
-#+HTML:<a onclick="alert(document.getElementById('instructions').firstChild.nodeValue);return false;" href="javascript:(function(){var e=document.createElement('script');e.src='http://tontof.net/kriss/dwld/script.js';document.body.appendChild(e);})();">KrISS dwld</a>
+#+HTML:<a onclick="alert(document.getElementById('instructions').firstChild.nodeValue);return false;" href="javascript:(function(){var e=document.createElement('script');e.src='//tontof.net/kriss/dwld/script.js';document.body.appendChild(e);})();">KrISS dwld</a>
 
 This bookmarklet loads the script located at http://tontof.net/kriss/dwld/script.js
 
