@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>KrISS dwld</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2013-09-14 07:42:49 CEST"/>
+<meta name="generated" content="2013-09-14 13:34:19 CEST"/>
 <meta name="author" content="Tontof"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -89,29 +89,33 @@ Feel free to contribute: <a href="https://github.com/tontof/kriss_dwld">https://
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 KrISS dwld bookmarklet </a></li>
+<li><a href="#KrISS_dwld">1 KrISS dwld bookmarklet </a></li>
 <li><a href="#sec-2">2 Independant bookmarklets </a>
 <ul>
-<li><a href="#sec-2.1">2.1 Youtube </a></li>
+<li><a href="#youtube">2.1 Youtube </a></li>
 </ul>
 </li>
 <li><a href="#sec-3">3 Alternatives </a>
 <ul>
 <li><a href="#sec-3.1">3.1 Youtube-dl </a></li>
 <li><a href="#sec-3.2">3.2 KeepVid </a></li>
+<li><a href="#sec-3.3">3.3 PwnYoutube / deturl </a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> KrISS dwld bookmarklet </h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-KrISS_dwld" class="outline-2">
+<h2 id="KrISS_dwld"><a name="sec-1" id="sec-1"></a><span class="section-number-2">1</span> KrISS dwld bookmarklet </h2>
+<div class="outline-text-2" id="text-KrISS_dwld">
+
+
 
 
 <div id="instructions">Drag the browser button link into your Bookmarks Toolbar:</div>
 <a onclick="alert(document.getElementById('instructions').firstChild.nodeValue);return false;" href="javascript:(function(){var e=document.createElement('script');e.src='//tontof.net/kriss/dwld/script.js';document.body.appendChild(e);})();">KrISS dwld</a>
+
 
 <p>
 This bookmarklet loads the script located at <a href="http://tontof.net/kriss/dwld/script.js">http://tontof.net/kriss/dwld/script.js</a>
@@ -128,12 +132,11 @@ It is based on 2 Grease Monkey scripts :
 </li>
 </ul>
 
-<p>Bookmarklet is very convenient because you do not need to install
+<p>This bookmarklet is very convenient because you do not need to install
 extension as GreaseMonkey or program and you will always be
-up-to-date. However KrISS dwld rely on <a href="http://tontof.net">http://tontof.net</a> as it needs
-some tricks for Youtube that are not possible using only
-javascript. Hopefully, you can install it easily on your server as
-everything is available on <a href="https://github.com/tontof/kriss_dwld">https://github.com/tontof/kriss_dwld</a>
+up-to-date. However KrISS dwld rely on <a href="http://tontof.net">http://tontof.net</a> but it's up
+to you. You can use following bookmarklets to be totally free of
+external service!
 </p>
 </div>
 
@@ -143,19 +146,19 @@ everything is available on <a href="https://github.com/tontof/kriss_dwld">https:
 <h2 id="sec-2"><span class="section-number-2">2</span> Independant bookmarklets </h2>
 <div class="outline-text-2" id="text-2">
 
-<p>Following bookmarklet(s) do not rely on <a href="http://tontof.net">http://tontof.net</a> and are
-recommended when possible.
+<p>Following bookmarklet(s) do not rely on <a href="http://tontof.net">http://tontof.net</a> so they will
+not be up-to-date.
 </p>
 </div>
 
-<div id="outline-container-2.1" class="outline-3">
-<h3 id="sec-2.1"><span class="section-number-3">2.1</span> Youtube </h3>
-<div class="outline-text-3" id="text-2.1">
+<div id="outline-container-youtube" class="outline-3">
+<h3 id="youtube"><a name="sec-2.1" id="sec-2.1"></a><span class="section-number-3">2.1</span> Youtube </h3>
+<div class="outline-text-3" id="text-youtube">
 
-<p>This bookmarklet does not work with commercial videos:
-<a onclick="alert(document.getElementById('instructions').firstChild.nodeValue);return false;" href="javascript:(function(){if(window.location.href.indexOf('/embed/')!==-1)window.location.assign(window.location.href.replace('/embed/','/watch?v='));else{var%20a=0,b={5:'FLV%20240p',18:'MP4%20360p',22:'MP4%20720p%20(HD)',34:'FLV%20360p',35:'FLV%20480p',37:'MP4%201080p%20(HD)',38:'MP4%204K%20(HD)',43:'WebM%20360p',44:'WebM%20480p',45:'WebM%20720p%20(HD)',46:'WebM%201080p%20(HD)'},c=document.getElementById('movie_player')||document.getElementById('movie_player-flash'),d=[],e,f={};if(c){d=c.getAttribute('flashvars').split('&');for(a=0;a<d.length;a++)f[d[a].split('=')[0]]=d[a].split('=')[1];e=decodeURIComponent(f.url_encoded_fmt_stream_map)}else%20if(typeof%20yt!='undefined'&&yt.playerConfig)e=yt.playerConfig.args.url_encoded_fmt_stream_map;else%20return;var%20g={},h=e.split(',');for(a=0;a<h.length;a++){var%20i=h[a].split('&'),j={};for(var%20k=0;k<i.length;k++){var%20l=i[k].split('=');l.length===2&&(j[l[0]]=l[1])}var%20m=j.url?j.url:null;if(m===null)continue;var%20n=j.itag?j.itag:null;if(n===null)continue;var%20o=j.sig?j.sig:null;o!==null&&(j.url=decodeURIComponent(m)+'&signature='+o),j.type=decodeURIComponent(j.type),m.toLowerCase().indexOf('http')===0&&(g[n]=j)}var%20p='',q=[];for(var%20r%20in%20g)b[r]&&(q.push(r),p+=q.length+'%20%E2%86%92%20'+b[r]+'\n');var%20s=parseInt(window.prompt(p),10)-1;s<q.length&&window.location.assign(g[q[s]].url)}})();">Youtube</a>
 
-</p></div>
+<a onclick="alert(document.getElementById('instructions').firstChild.nodeValue);return false;" href="javascript:(function(){'use strict';function ytSig(d){var e=[43,2,54,0,8,-1];function swap(a,b){var c=a[0];a[0]=a[b%a.length];a[b]=c;return a};var f=d.split('');for(var i=0;i<e.length;i++){var g=e[i];f=(g>0)?swap(f,g):((g==0)?f.reverse():f.slice(-g))}return f.join('')}if(window.location.href.indexOf('/embed/')!==-1){window.location.assign(window.location.href.replace('/embed/','/watch?v='))}else{var i=0,FORMAT_LABEL={'5':'FLV 240p','18':'MP4 360p','22':'MP4 720p (HD)','34':'FLV 360p','35':'FLV 480p','37':'MP4 1080p (HD)','38':'MP4 4K (HD)','43':'WebM 360p','44':'WebM 480p','45':'WebM 720p (HD)','46':'WebM 1080p (HD)'},player=document.getElementById('movie_player')||document.getElementById('movie_player-flash'),tab=[],videoFormats,vars={};if(player){tab=player.getAttribute('flashvars').split('&');for(i=0;i<tab.length;i++){vars[tab[i].split('=')[0]]=tab[i].split('=')[1]}videoFormats=decodeURIComponent(vars.url_encoded_fmt_stream_map)}else{if(typeof(yt)!='undefined'&&yt.playerConfig){videoFormats=yt.playerConfig.args.url_encoded_fmt_stream_map}else{return}}var h={};var k=videoFormats.split(',');for(i=0;i<k.length;i++){var l=k[i].split('&');var m={};for(var j=0;j<l.length;j++){var n=l[j].split('=');if(n.length===2){m[n[0]]=n[1]}}var o=(m.url)?m.url:null;if(o===null){continue}var p=(m.itag)?m.itag:null;if(p===null){continue}var q=(m.sig)?m.sig:null;if(q==null){q=ytSig(m.s)}if(q!==null){m.url=decodeURIComponent(o)+'&signature='+q}m.type=decodeURIComponent(m.type);if(o.toLowerCase().indexOf('http')===0){h[p]=m}}var s='';var t=[];for(var u in h){if(FORMAT_LABEL[u]){t.push(u);s+=t.length+' => '+FORMAT_LABEL[u]+'\n'}}var r=parseInt(window.prompt(s),10)-1;if(r<t.length){window.location.assign(h[t[r]].url)}}})();">Youtube</a>
+
+</div>
 </div>
 
 </div>
@@ -192,10 +195,24 @@ recommended when possible.
 </li>
 </ul>
 </div>
+
+</div>
+
+<div id="outline-container-3.3" class="outline-3">
+<h3 id="sec-3.3"><span class="section-number-3">3.3</span> PwnYoutube / deturl </h3>
+<div class="outline-text-3" id="text-3.3">
+
+<p>Add pwn in from of url
+<a href="http://www.youtube.com/XXXXX">http://www.youtube.com/XXXXX</a>
+by
+<a href="http://pwnyoutube.com/XXXXX">http://pwnyoutube.com/XXXXX</a> 
+or go to
+<a href="http://deturl.com">http://deturl.com</a>
+</p></div>
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2013-09-14 07:42:49 CEST</p>
+<p class="date"> Date: 2013-09-14 13:34:19 CEST</p>
 </div>
 </div>
 </body>

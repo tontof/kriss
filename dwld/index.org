@@ -14,8 +14,13 @@ KrISS dwld is a simple and smart (or stupid) downloader bookmarklet.
 Feel free to contribute: https://github.com/tontof/kriss_dwld
 
 * KrISS dwld bookmarklet
+  :PROPERTIES:
+  :CUSTOM_ID: KrISS_dwld
+  :END:
+
 #+HTML:<div id="instructions">Drag the browser button link into your Bookmarks Toolbar:</div>
 #+HTML:<a onclick="alert(document.getElementById('instructions').firstChild.nodeValue);return false;" href="javascript:(function(){var e=document.createElement('script');e.src='//tontof.net/kriss/dwld/script.js';document.body.appendChild(e);})();">KrISS dwld</a>
+
 
 This bookmarklet loads the script located at http://tontof.net/kriss/dwld/script.js
 
@@ -23,20 +28,20 @@ It is based on 2 Grease Monkey scripts :
 - http://userscripts.org/scripts/review/25105 (Licence MIT) for Youtube
 - http://userscripts.org/scripts/review/130917 (GPL3) for other websites (Dailymotion, Vimeo, Veoh, etc.)
 
-Bookmarklet is very convenient because you do not need to install
+This bookmarklet is very convenient because you do not need to install
 extension as GreaseMonkey or program and you will always be
-up-to-date. However KrISS dwld rely on http://tontof.net as it needs
-some tricks for Youtube that are not possible using only
-javascript. Hopefully, you can install it easily on your server as
-everything is available on https://github.com/tontof/kriss_dwld
+up-to-date. However KrISS dwld rely on http://tontof.net but it's up
+to you. You can use following bookmarklets to be totally free of
+external service!
 
 * Independant bookmarklets
-Following bookmarklet(s) do not rely on http://tontof.net and are
-recommended when possible.
+Following bookmarklet(s) do not rely on http://tontof.net so they will
+not be up-to-date.
 ** Youtube
-This bookmarklet does not work with commercial videos:
-#+HTML:<a onclick="alert(document.getElementById('instructions').firstChild.nodeValue);return false;" href="javascript:(function(){if(window.location.href.indexOf('/embed/')!==-1)window.location.assign(window.location.href.replace('/embed/','/watch?v='));else{var%20a=0,b={5:'FLV%20240p',18:'MP4%20360p',22:'MP4%20720p%20(HD)',34:'FLV%20360p',35:'FLV%20480p',37:'MP4%201080p%20(HD)',38:'MP4%204K%20(HD)',43:'WebM%20360p',44:'WebM%20480p',45:'WebM%20720p%20(HD)',46:'WebM%201080p%20(HD)'},c=document.getElementById('movie_player')||document.getElementById('movie_player-flash'),d=[],e,f={};if(c){d=c.getAttribute('flashvars').split('&');for(a=0;a<d.length;a++)f[d[a].split('=')[0]]=d[a].split('=')[1];e=decodeURIComponent(f.url_encoded_fmt_stream_map)}else%20if(typeof%20yt!='undefined'&&yt.playerConfig)e=yt.playerConfig.args.url_encoded_fmt_stream_map;else%20return;var%20g={},h=e.split(',');for(a=0;a<h.length;a++){var%20i=h[a].split('&'),j={};for(var%20k=0;k<i.length;k++){var%20l=i[k].split('=');l.length===2&&(j[l[0]]=l[1])}var%20m=j.url?j.url:null;if(m===null)continue;var%20n=j.itag?j.itag:null;if(n===null)continue;var%20o=j.sig?j.sig:null;o!==null&&(j.url=decodeURIComponent(m)+'&signature='+o),j.type=decodeURIComponent(j.type),m.toLowerCase().indexOf('http')===0&&(g[n]=j)}var%20p='',q=[];for(var%20r%20in%20g)b[r]&&(q.push(r),p+=q.length+'%20%E2%86%92%20'+b[r]+'\n');var%20s=parseInt(window.prompt(p),10)-1;s<q.length&&window.location.assign(g[q[s]].url)}})();">Youtube</a>
-
+  :PROPERTIES:
+  :CUSTOM_ID: youtube
+  :END:
+#+HTML:<a onclick="alert(document.getElementById('instructions').firstChild.nodeValue);return false;" href="javascript:(function(){'use strict';function ytSig(d){var e=[43,2,54,0,8,-1];function swap(a,b){var c=a[0];a[0]=a[b%a.length];a[b]=c;return a};var f=d.split('');for(var i=0;i<e.length;i++){var g=e[i];f=(g>0)?swap(f,g):((g==0)?f.reverse():f.slice(-g))}return f.join('')}if(window.location.href.indexOf('/embed/')!==-1){window.location.assign(window.location.href.replace('/embed/','/watch?v='))}else{var i=0,FORMAT_LABEL={'5':'FLV 240p','18':'MP4 360p','22':'MP4 720p (HD)','34':'FLV 360p','35':'FLV 480p','37':'MP4 1080p (HD)','38':'MP4 4K (HD)','43':'WebM 360p','44':'WebM 480p','45':'WebM 720p (HD)','46':'WebM 1080p (HD)'},player=document.getElementById('movie_player')||document.getElementById('movie_player-flash'),tab=[],videoFormats,vars={};if(player){tab=player.getAttribute('flashvars').split('&');for(i=0;i<tab.length;i++){vars[tab[i].split('=')[0]]=tab[i].split('=')[1]}videoFormats=decodeURIComponent(vars.url_encoded_fmt_stream_map)}else{if(typeof(yt)!='undefined'&&yt.playerConfig){videoFormats=yt.playerConfig.args.url_encoded_fmt_stream_map}else{return}}var h={};var k=videoFormats.split(',');for(i=0;i<k.length;i++){var l=k[i].split('&');var m={};for(var j=0;j<l.length;j++){var n=l[j].split('=');if(n.length===2){m[n[0]]=n[1]}}var o=(m.url)?m.url:null;if(o===null){continue}var p=(m.itag)?m.itag:null;if(p===null){continue}var q=(m.sig)?m.sig:null;if(q==null){q=ytSig(m.s)}if(q!==null){m.url=decodeURIComponent(o)+'&signature='+q}m.type=decodeURIComponent(m.type);if(o.toLowerCase().indexOf('http')===0){h[p]=m}}var s='';var t=[];for(var u in h){if(FORMAT_LABEL[u]){t.push(u);s+=t.length+' => '+FORMAT_LABEL[u]+'\n'}}var r=parseInt(window.prompt(s),10)-1;if(r<t.length){window.location.assign(h[t[r]].url)}}})();">Youtube</a>
 * Alternatives
 ** Youtube-dl
 Command line using python:
@@ -44,3 +49,10 @@ Command line using python:
 ** KeepVid
 Needs java but also works with a bookmarklet:
 - http://www.keepvid.com
+** PwnYoutube / deturl
+Add pwn in from of url
+http://www.youtube.com/XXXXX
+by
+http://pwnyoutube.com/XXXXX 
+or go to
+http://deturl.com
