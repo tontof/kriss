@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>KrISS dwld</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2013-09-14 13:34:19 CEST"/>
+<meta name="generated" content="2013-09-14 15:00:23 CEST"/>
 <meta name="author" content="Tontof"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -90,7 +90,7 @@ Feel free to contribute: <a href="https://github.com/tontof/kriss_dwld">https://
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#KrISS_dwld">1 KrISS dwld bookmarklet </a></li>
-<li><a href="#sec-2">2 Independant bookmarklets </a>
+<li><a href="#sec-2">2 Standalone bookmarklets </a>
 <ul>
 <li><a href="#youtube">2.1 Youtube </a></li>
 </ul>
@@ -111,23 +111,23 @@ Feel free to contribute: <a href="https://github.com/tontof/kriss_dwld">https://
 <div class="outline-text-2" id="text-KrISS_dwld">
 
 
-
-
 <div id="instructions">Drag the browser button link into your Bookmarks Toolbar:</div>
 <a onclick="alert(document.getElementById('instructions').firstChild.nodeValue);return false;" href="javascript:(function(){var e=document.createElement('script');e.src='//tontof.net/kriss/dwld/script.js';document.body.appendChild(e);})();">KrISS dwld</a>
 
-
 <p>
-This bookmarklet loads the script located at <a href="http://tontof.net/kriss/dwld/script.js">http://tontof.net/kriss/dwld/script.js</a>
+This bookmarklet loads the script located at
+<a href="http://tontof.net/kriss/dwld/script.js">http://tontof.net/kriss/dwld/script.js</a>
 </p>
 <p>
 It is based on 2 Grease Monkey scripts :
 </p><ul>
 <li>
-<a href="http://userscripts.org/scripts/review/25105">http://userscripts.org/scripts/review/25105</a> (Licence MIT) for Youtube
+<a href="http://userscripts.org/scripts/review/25105">http://userscripts.org/scripts/review/25105</a> (Licence MIT) for
+Youtube
 </li>
 <li>
-<a href="http://userscripts.org/scripts/review/130917">http://userscripts.org/scripts/review/130917</a> (GPL3) for other websites (Dailymotion, Vimeo, Veoh, etc.)
+<a href="http://userscripts.org/scripts/review/130917">http://userscripts.org/scripts/review/130917</a> (GPL3) for other
+websites (Dailymotion, Vimeo, Veoh, etc.)
 
 </li>
 </ul>
@@ -143,11 +143,11 @@ external service!
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Independant bookmarklets </h2>
+<h2 id="sec-2"><span class="section-number-2">2</span> Standalone bookmarklets </h2>
 <div class="outline-text-2" id="text-2">
 
 <p>Following bookmarklet(s) do not rely on <a href="http://tontof.net">http://tontof.net</a> so they will
-not be up-to-date.
+not be up-to-date automatically.
 </p>
 </div>
 
@@ -157,7 +157,6 @@ not be up-to-date.
 
 
 <a onclick="alert(document.getElementById('instructions').firstChild.nodeValue);return false;" href="javascript:(function(){'use strict';function ytSig(d){var e=[43,2,54,0,8,-1];function swap(a,b){var c=a[0];a[0]=a[b%a.length];a[b]=c;return a};var f=d.split('');for(var i=0;i<e.length;i++){var g=e[i];f=(g>0)?swap(f,g):((g==0)?f.reverse():f.slice(-g))}return f.join('')}if(window.location.href.indexOf('/embed/')!==-1){window.location.assign(window.location.href.replace('/embed/','/watch?v='))}else{var i=0,FORMAT_LABEL={'5':'FLV 240p','18':'MP4 360p','22':'MP4 720p (HD)','34':'FLV 360p','35':'FLV 480p','37':'MP4 1080p (HD)','38':'MP4 4K (HD)','43':'WebM 360p','44':'WebM 480p','45':'WebM 720p (HD)','46':'WebM 1080p (HD)'},player=document.getElementById('movie_player')||document.getElementById('movie_player-flash'),tab=[],videoFormats,vars={};if(player){tab=player.getAttribute('flashvars').split('&');for(i=0;i<tab.length;i++){vars[tab[i].split('=')[0]]=tab[i].split('=')[1]}videoFormats=decodeURIComponent(vars.url_encoded_fmt_stream_map)}else{if(typeof(yt)!='undefined'&&yt.playerConfig){videoFormats=yt.playerConfig.args.url_encoded_fmt_stream_map}else{return}}var h={};var k=videoFormats.split(',');for(i=0;i<k.length;i++){var l=k[i].split('&');var m={};for(var j=0;j<l.length;j++){var n=l[j].split('=');if(n.length===2){m[n[0]]=n[1]}}var o=(m.url)?m.url:null;if(o===null){continue}var p=(m.itag)?m.itag:null;if(p===null){continue}var q=(m.sig)?m.sig:null;if(q==null){q=ytSig(m.s)}if(q!==null){m.url=decodeURIComponent(o)+'&signature='+q}m.type=decodeURIComponent(m.type);if(o.toLowerCase().indexOf('http')===0){h[p]=m}}var s='';var t=[];for(var u in h){if(FORMAT_LABEL[u]){t.push(u);s+=t.length+' => '+FORMAT_LABEL[u]+'\n'}}var r=parseInt(window.prompt(s),10)-1;if(r<t.length){window.location.assign(h[t[r]].url)}}})();">Youtube</a>
-
 </div>
 </div>
 
@@ -212,7 +211,7 @@ or go to
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2013-09-14 13:34:19 CEST</p>
+<p class="date"> Date: 2013-09-14 15:00:23 CEST</p>
 </div>
 </div>
 </body>

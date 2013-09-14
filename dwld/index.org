@@ -17,16 +17,17 @@ Feel free to contribute: https://github.com/tontof/kriss_dwld
   :PROPERTIES:
   :CUSTOM_ID: KrISS_dwld
   :END:
-
 #+HTML:<div id="instructions">Drag the browser button link into your Bookmarks Toolbar:</div>
 #+HTML:<a onclick="alert(document.getElementById('instructions').firstChild.nodeValue);return false;" href="javascript:(function(){var e=document.createElement('script');e.src='//tontof.net/kriss/dwld/script.js';document.body.appendChild(e);})();">KrISS dwld</a>
 
-
-This bookmarklet loads the script located at http://tontof.net/kriss/dwld/script.js
+This bookmarklet loads the script located at
+http://tontof.net/kriss/dwld/script.js
 
 It is based on 2 Grease Monkey scripts :
-- http://userscripts.org/scripts/review/25105 (Licence MIT) for Youtube
-- http://userscripts.org/scripts/review/130917 (GPL3) for other websites (Dailymotion, Vimeo, Veoh, etc.)
+- http://userscripts.org/scripts/review/25105 (Licence MIT) for
+  Youtube
+- http://userscripts.org/scripts/review/130917 (GPL3) for other
+  websites (Dailymotion, Vimeo, Veoh, etc.)
 
 This bookmarklet is very convenient because you do not need to install
 extension as GreaseMonkey or program and you will always be
@@ -34,9 +35,9 @@ up-to-date. However KrISS dwld rely on http://tontof.net but it's up
 to you. You can use following bookmarklets to be totally free of
 external service!
 
-* Independant bookmarklets
+* Standalone bookmarklets
 Following bookmarklet(s) do not rely on http://tontof.net so they will
-not be up-to-date.
+not be up-to-date automatically.
 ** Youtube
   :PROPERTIES:
   :CUSTOM_ID: youtube
