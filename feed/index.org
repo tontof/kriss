@@ -116,6 +116,8 @@ Some styles need other files as font.
 |----------------+-----------------------------------------+-------------------|
 | greader        | [[file:img/style/greader.png][file:img/style/greader_thumb.jpg]]        | [[https://raw.github.com/tontof/kriss_feed/master/style/greader/user.css][css]]               |
 |----------------+-----------------------------------------+-------------------|
+| grey           | [[file:img/style/grey.jpg][file:img/style/grey_thumb.jpg]]           | [[https://raw.github.com/tontof/kriss_feed/master/style/grey/user.css][css]]               |
+|----------------+-----------------------------------------+-------------------|
 | orangina-rouge | [[file:img/style/orangina-rouge.png][file:img/style/orangina-rouge_thumb.jpg]] | [[https://raw.github.com/tontof/kriss_feed/master/style/orangina-rouge/user.css][css]]               |
 |----------------+-----------------------------------------+-------------------|
 | p3ter          | [[file:img/style/p3ter.png][file:img/style/p3ter_thumb.jpg]]          | [[https://raw.github.com/tontof/kriss_feed/master/style/p3ter/user.css][css]]               |
