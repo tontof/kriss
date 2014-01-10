@@ -2,24 +2,9 @@
 (function(){
     'use strict';
 
-    /* from deturl */
-    function ytSig(d) {     
-    	var e = [43, 2, 54, 0, 8, -1];
-	function swap(a, b) {
-		var c = a[0];
-		a[0] = a[b % a.length];
-		a[b] = c;
-		return a
-	};
-	var f = d.split('');
-	for (var i = 0; i < e.length; i++) {
-            var g = e[i];
-	    f = (g > 0) ? swap(f, g) : ((g == 0) ? f.reverse() : f.slice( - g))
-	}
-
-	return f.join('')
-    }
-	
+    function Rk(a){a=a.split("");a=a.reverse();a=a.slice(1);a=Sk(a,1);a=a.reverse();a=Sk(a,43);a=a.reverse();a=a.slice(1);a=a.reverse();return a.join("")}
+    function Sk(a,b){var c=a[0];a[0]=a[b%a.length];a[b]=c;return a};
+    function ytSig(d){return Rk(d);}
 
     if (window.location.href.indexOf('/embed/') !== -1) {
         window.location.assign(window.location.href.replace('/embed/', '/watch?v='));
